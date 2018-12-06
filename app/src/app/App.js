@@ -13,6 +13,9 @@ import env from './env/environment';
 import { setScrollbarWidth } from './common/state/newui/index';
 import './App.css';
 
+// TODO
+const ROOM_ID = '5c095a357b5aed0028f39e5c';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +23,7 @@ class App extends Component {
     this.syncClient = new SyncClient({ syncServerUrl: env.syncServerUrl });
     this.syncClient.connect();
     setTimeout(() => {
-      this.syncClient.joinRoom('5c095a357b5aed0028f39e5c');
+      this.syncClient.joinRoom(ROOM_ID);
     }, 3000)
   }
 
@@ -42,7 +45,7 @@ class App extends Component {
           <ViewportQuery />
           <BannerList />
           <ToastList />
-          <SyncPlayer playerId='test-player' video={video} className="test-sync-player" />
+          <SyncPlayer playerId='test-player' video={video} className="test-sync-player" roomId={ROOM_ID} />
         </div>
       </SyncClientContext.Provider>
     );

@@ -4,9 +4,6 @@ import VideoPlayer from '../../common/ui/video-player/VideoPlayer';
 
 import './SyncPlayer.css';
 
-// TODO
-const ROOM_ID = '5c095a357b5aed0028f39e5c';
-
 /**
  * You must pass the prop `playerId`, which is a string to 
  * identify the player from other SyncPlayers in the same
@@ -56,7 +53,7 @@ class SyncPlayer extends Component {
   };
 
   handlePlayFromServer = (roomId) => {
-    if (ROOM_ID !== roomId) { return; }
+    if (this.props.roomId !== roomId) { return; }
     let player = this.videoPlayerRef.current.player;
     
     if (player.video.paused) {
@@ -65,7 +62,7 @@ class SyncPlayer extends Component {
   };
 
   handlePauseFromServer = (roomId) => {
-    if (ROOM_ID !== roomId) { return; }
+    if (this.props.roomId !== roomId) { return; }
     let player = this.videoPlayerRef.current.player;
 
     if (!player.video.paused) {
@@ -74,13 +71,13 @@ class SyncPlayer extends Component {
   };
 
   handleSeekingFromServer = (roomId, currentTime, timestamp) => {
-    if (ROOM_ID !== roomId) { return; }
+    if (this.props.roomId !== roomId) { return; }
     this.receivedSeekingFromServer = true;
     this.videoPlayerRef.current.player.seek(currentTime);
   };
 
   handleTimeUpdateFromServer = (roomId, paused, currentTime, timestamp) => {
-    if (ROOM_ID !== roomId) { return; }
+    if (this.props.roomId !== roomId) { return; }
     let player = this.videoPlayerRef.current.player;
 
     if (player.video.paused !== paused) {
@@ -93,11 +90,11 @@ class SyncPlayer extends Component {
   };
 
   handlePlay = (player) => {
-    this.props.syncClient.play(ROOM_ID, player.video.currentTime);
+    this.props.syncClient.play(this.props.roomId, player.video.currentTime);
   };
 
   handlePause = (player) => {
-    this.props.syncClient.pause(ROOM_ID, player.video.currentTime);
+    this.props.syncClient.pause(this.props.roomId, player.video.currentTime);
   };
 
   handleSeeking = (player) => {
@@ -107,7 +104,7 @@ class SyncPlayer extends Component {
     }
 
     let { currentTime, paused } = player.video;
-    this.props.syncClient.seek(ROOM_ID, paused, currentTime);
+    this.props.syncClient.seek(this.props.roomId, paused, currentTime);
   }
 
   /**
@@ -115,7 +112,7 @@ class SyncPlayer extends Component {
    */
   handleTimeUpdate = (player) => {
     let { currentTime, paused } = player.video;
-    this.props.syncClient.updateTime(ROOM_ID, paused, currentTime);
+    this.props.syncClient.updateTime(this.props.roomId, paused, currentTime);
   };
 
   render() {
