@@ -1,0 +1,11 @@
+@import '_common';
+
+.ToastList {
+  position: fixed;
+  z-index: $z-index-toast;
+  right: 20px;
+  bottom: 20px;
+  margin-left: 20px;
+  max-width: calc(50% - 20px);
+  box-sizing: border-box;
+}

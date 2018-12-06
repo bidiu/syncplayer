@@ -1,0 +1,25 @@
+.ExpandFade-enter {
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-16px) scaleY(0);
+}
+
+.ExpandFade-enter-active {
+  opacity: 1;
+  max-height: 300px;
+  transform: translateY(0) scaleY(1); 
+  transition: opacity .3s, transform .3s, max-height .3s;
+}
+
+.ExpandFade-exit {
+  opacity: 1;
+  max-height: 300px;
+  transform: translateY(0) scaleY(1);
+}
+
+.ExpandFade-exit-active {
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-16px) scaleY(0);
+  transition: opacity .3s, transform .3s, max-height .3s;
+}

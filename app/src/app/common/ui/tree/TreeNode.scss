@@ -1,0 +1,31 @@
+@import 'common';
+
+.TreeNode-title {
+  display: flex;
+  align-items: center;
+  user-select: none;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.TreeNode-title-arrow {
+  transition: .1s;
+  margin-right: 8px;
+  opacity: .5;
+}
+
+.TreeNode-title-arrow.TreeNode-expanded {
+  transform: rotateZ(90deg);
+}
+
+.TreeNode-nest-1 {
+  padding-left: 32px;
+}
+
+.TreeNode-nest-2 {
+  padding-left: 64px;
+}
+
+.TreeNode-title:hover {
+  background-color: $bg-color-dark-var1
+}

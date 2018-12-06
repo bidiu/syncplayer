@@ -1,0 +1,45 @@
+version: '3.1'
+
+services:
+  # the mysql server
+  the_host_mongo_dev:
+    image: mongo:3.6.5-jessie
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - 'the_host_mongo_volume_dev:/data/db'
+
+  # the api server
+  the_host_api_dev:
+    build:
+      context: ./api
+    image: the-host-api:dev
+    ports:
+      - '4010:4010'
+      # export debugging port, you can also debug remotely
+      - '9229:9229'
+      - '1113:1113'
+      - '1114:1114'
+    volumes:
+      # mount the src dir into container, so you can do live editing
+      - './api:/usr/src/app'
+    depends_on:
+      - the_host_mongo_dev
+  
+  # the web app
+  the_host_app_dev:
+    build:
+      context: ./app
+    image: the-host-app:dev
+    ports:
+      - '3000:3000'
+    volumes:
+      # mount the src dir into container, so you can do live editing
+      - './app:/usr/src/app'
+    depends_on:
+      - the_host_api_dev
+
+volumes:
+  # used by mongodb
+  the_host_mongo_volume_dev:

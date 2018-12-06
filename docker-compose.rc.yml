@@ -1,0 +1,61 @@
+version: '3.1'
+
+services:
+  # mongodb server
+  the_host_mongo:
+    image: mongo:3.6.5-jessie
+    restart: always
+    ports:
+      - '27017:27017'
+    networks:
+      - inkbook
+    volumes:
+      - 'the_host_mongo_volume:/data/db'
+
+  # api server
+  the_host_api:
+    build:
+      context: ./api
+      dockerfile: rc.Dockerfile
+    image: the-host-api:rc
+    networks:
+      - inkbook
+    depends_on:
+      - the_host_mongo
+  
+  # web app
+  the_host_app:
+    build:
+      context: ./app
+      dockerfile: rc.Dockerfile
+    image: the-host-app:rc
+    networks:
+      - inkbook
+    depends_on:
+      - the_host_api
+
+  # nginx http proxy server
+  the_host_proxy:
+    build:
+      context: ./nginx
+      dockerfile: rc.Dockerfile
+    image: the-host-proxy:rc
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - '/etc/ssl/private/inkbook.io.key:/etc/ssl/private/inkbook.io.key:ro'
+      - '/etc/ssl/certs/inkbook.io-ssl-bundle.crt:/etc/ssl/certs/inkbook.io-ssl-bundle.crt:ro'
+    networks:
+      - inkbook
+    depends_on:
+      - the_host_api
+      - the_host_app
+
+volumes:
+  # used by mongodb
+  the_host_mongo_volume:
+
+networks:
+  inkbook:
+    external: true

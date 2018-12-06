@@ -1,0 +1,47 @@
+@import '_common';
+
+.Bubble-left::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  position: absolute;
+  top: calc(50% - 8px);
+  left: -20px;
+  z-index: $z-index-bubble + 1;
+  box-sizing: border-box;
+  transform: rotateZ(45deg);
+  border-top: 1px solid #eeeeee;
+  border-right: 1px solid #cccccc;
+}
+
+.Bubble-right::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  position: absolute;
+  top: calc(50% - 8px);
+  left: calc(100% + 4px);
+  z-index: $z-index-bubble + 1;
+  box-sizing: border-box;
+  transform: rotateZ(-135deg);
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #eeeeee;
+}
+
+.Bubble-content {
+  position: absolute;
+  z-index: $z-index-bubble;
+  background-color: #ffffff;
+}
+
+.Bubble-overlay {
+  position: fixed;
+  z-index: $z-index-overlay;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0;
+}

@@ -1,0 +1,28 @@
+/* 
+ * The animation duration could ONLY be smaller than
+ * the duration on the CSSTransition, but can NOT be
+ * bigger!
+ * 
+ * These transition CSS could be part of the Fade UI util
+ * component, instead of the chidlren of it (or as a default
+ * set of styles, when user want to have custom ones, they should
+ * pass different class names).
+ */
+
+.Fade-enter {
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.Fade-enter-active {
+  opacity: 1;
+}
+
+.Fade-exit {
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+.Fade-exit-active {
+  opacity: 0;
+}

@@ -1,0 +1,38 @@
+@import '_common';
+
+$sidebar-width: 240px;
+
+.BurgerMenu .burger-icon {
+  display: inline-block;
+}
+
+.BurgerMenu .close-icon {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  cursor: pointer;
+  opacity: .8;
+  transition: .3s;
+}
+
+.BurgerMenu .close-icon:hover {
+  color: $bg-color-critical;
+  opacity: 1;
+}
+
+.BurgerMenu .sidebar {
+  position: fixed;
+  transition: .3s;
+  width: $sidebar-width;
+  height: 100vh;
+  top: 0;
+  right: -($sidebar-width + 10px);
+  background-color: $bg-color-dark;
+  box-shadow: $box-shadow-focus;
+  padding: 80px 16px;
+  box-sizing: border-box;
+}
+
+.BurgerMenu .sidebar.open {
+  right: 0;
+}

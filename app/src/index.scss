@@ -1,0 +1,316 @@
+@import '_common';
+@import '_reset';
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 0) and (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media (min-width: 1025px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+
+.font-primary {
+  @include font($font-weight-primary, $font-size-primary, $font-family-primary);
+}
+
+.font-primary-light {
+  @include font($font-weight-light, $font-size-primary, $font-family-primary);
+}
+
+.font-primary-bold {
+  @include font($font-weight-bold, $font-size-primary, $font-family-primary);
+}
+
+.font-primary-black {
+  @include font($font-weight-black, $font-size-primary, $font-family-primary);
+}
+
+.font-big {
+  @include font($font-weight-primary, $font-size-big, $font-family-primary);
+}
+
+.font-big-light {
+  @include font($font-weight-light, $font-size-big, $font-family-primary);
+}
+
+.font-big-bold {
+  @include font($font-weight-bold, $font-size-big, $font-family-primary);
+}
+
+.font-big-black {
+  @include font($font-weight-black, $font-size-big, $font-family-primary);
+}
+
+.font-small {
+  @include font($font-weight-primary, $font-size-small, $font-family-primary);
+}
+
+.font-small-light {
+  @include font($font-weight-light, $font-size-small, $font-family-primary);
+}
+
+.font-small-bold {
+  @include font($font-weight-bold, $font-size-small, $font-family-primary);
+}
+
+.font-small-black {
+  @include font($font-weight-black, $font-size-small, $font-family-primary);
+}
+
+.font-tiny {
+  @include font($font-weight-primary, $font-size-tiny, $font-family-primary);
+}
+
+.font-tiny-light {
+  @include font($font-weight-light, $font-size-tiny, $font-family-primary);
+}
+
+.font-tiny-bold {
+  @include font($font-weight-bold, $font-size-tiny, $font-family-primary);
+}
+
+.font-tiny-black {
+  @include font($font-weight-black, $font-size-tiny, $font-family-primary);
+}
+
+
+.ink-popup {
+  border-radius: 2px;
+  box-shadow: $box-shadow;
+}
+
+.ink-popup-focus {
+  border-radius: 2px;
+  box-shadow: $box-shadow-focus;
+}
+
+.ink-link {
+  cursor: pointer;
+}
+.ink-link:hover {
+  color: $link-color-primary;
+}
+
+.ink-link-var1 {
+  cursor: pointer;
+}
+.ink-link-var1:hover {
+  color: $link-color-var1;
+}
+
+.ink-link-var2 {
+  cursor: pointer;
+}
+.ink-link-var2:hover {
+  text-decoration: underline;
+}
+
+.ink-link-var3 {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.ink-link-var3:hover {
+  color: $link-color-primary;
+}
+
+
+// for sizing material icons
+.material-icons.md-18 { font-size: 1.8rem; }
+.material-icons.md-24 { font-size: 2.4rem; }
+.material-icons.md-36 { font-size: 3.6rem; }
+.material-icons.md-48 { font-size: 4.8rem; }
+
+// for using icons as black on a light background
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+// for using icons as white on a dark background
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+
+.bg-color-dark {
+  background-color: $bg-color-dark;
+}
+
+.bg-color-dark-var1 {
+  background-color: $bg-color-dark-var1;
+}
+
+.bg-color-light {
+  background-color: $bg-color-light;
+}
+
+.bg-color-warning {
+  background-color: $bg-color-warning;
+}
+
+.bg-color-critical {
+  background-color: $bg-color-critical;
+}
+
+
+.text-color-primary {
+  color: $text-color-primary;
+}
+
+.text-color-var1 {
+  color: $text-color-var1;
+}
+
+.text-color-var2 {
+  color: $text-color-var2;
+}
+
+.text-color-var3 {
+  color: $text-color-var3;
+}
+
+.text-color-var4 {
+  color: $text-color-var4;
+}
+
+.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.console-print {
+  color: rgb(111, 211, 111);
+  background-color: rgb(230, 248, 230);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgb(111, 211, 111);
+}
+
+.console-print-var1 {
+  color: rgb(111, 211, 111);
+  padding: 2px 6px;
+}
+
+.console-print-var2 {
+  color: $text-color-primary;
+  background-color: #fcfcfc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+}
+
+
+.prevent-body-scroll {
+  // height: 100%;
+  // width: 100%;
+  overflow: hidden;
+  // position: fixed;
+}
+
+
+// some responsive helpers
+.vp-mobile-show {
+  position: fixed !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+.VIEWPORT_MOBILE .vp-mobile-show {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+.VIEWPORT_MOBILE .vp-mobile-hide {
+  position: fixed !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+
+// animation key frames
+@keyframes rotate-full-round {
+  from {}
+  to {
+    transform: rotateZ(360deg)
+  }
+}
+
+button:focus {
+  box-shadow: $focus-outline;
+}
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+
+a.shopify-link {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #8049e7;
+}
+
+a.shopify-link:focus,
+a.shopify-link:hover {
+  opacity: 0.8;
+}
+
+a.shopify-link:focus {
+  box-shadow: 0 0 2px 2px #a293da86;
+}
+
+button.btn-link {
+  border-radius: 2px;
+  padding: 0 8px;
+  cursor: pointer;
+  // text-decoration: underline;
+  // color: #8049e7;
+}
+
+button.btn-link:hover,
+button.btn-link:focus {
+  opacity: 0.8;
+}
+
+button.shopify-btn {
+  box-sizing: border-box;
+  height: 42px;
+  border-radius: 2px;
+  background-color: #7e24fa;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  color: #f4ecff;
+  padding: 0 32px;
+  font-weight: bold;
+}
+
+button.shopify-btn:hover {
+  background-color: #6624d2;
+}
+
+button.shopify-btn:active {
+  background-color: #3e2e94;
+  color: #cfcfcf;
+}

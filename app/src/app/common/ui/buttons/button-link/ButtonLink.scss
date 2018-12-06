@@ -1,0 +1,16 @@
+@import "_common";
+
+$border-radius: 4px;
+
+.ButtonLink {
+  border-radius: $border-radius;
+  vertical-align: baseline;
+  padding: 2px 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.ButtonLink:hover,
+.ButtonLink:focus {
+  color: $theme-color-var1;
+}

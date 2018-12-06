@@ -1,0 +1,53 @@
+{
+  "name": "litemessage.com",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "clear-sass-cache": "rm -rf ./sass-cache",
+    "watch-scss": "npm run clear-sass-cache && sass --load-path ./src --sourcemap=none --watch ./src:./src",
+    "build-css": "npm run clear-sass-cache && sass --load-path ./src --sourcemap=none --update ./src:./src",
+    "build-production": "npm run build-css && react-scripts build",
+    "serve-build": "serve -sp 3000 build",
+    "start": "concurrently --raw \"npm run watch-scss\" \"react-scripts start\"",
+    "start-production": "npm run build-production && npm run serve-build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "aos": "^3.0.0-beta.5",
+    "clone": "^2.1.1",
+    "color2": "^1.0.8",
+    "core-js": "^2.5.7",
+    "css-element-queries": "^1.0.1",
+    "deep-eql": "^3.0.1",
+    "dplayer": "^1.25.0",
+    "jquery": "^3.3.1",
+    "litemessage": "^0.10.17",
+    "lodash": "^4.17.11",
+    "make-color-accessible": "^1.2.0",
+    "particlesjs": "^2.2.3",
+    "pick-a-good-color": "^1.1.1",
+    "promise-polyfill": "^7.0.0",
+    "randomcolor": "^0.5.3",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-media": "^1.6.1",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "^1.1.5",
+    "react-text-truncate": "^0.13.1",
+    "react-transition-group": "^2.5.0",
+    "redux": "^3.7.2",
+    "redux-observable": "^0.17.0",
+    "rxjs": "^5.5.6",
+    "slick-carousel": "^1.7.1",
+    "uuid": "^3.3.2",
+    "whatwg-fetch": "^2.0.3",
+    "wolfy87-eventemitter": "^5.2.5"
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "workerize-loader": "^1.0.4"
+  }
+}

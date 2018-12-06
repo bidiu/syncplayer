@@ -1,0 +1,30 @@
+/* 
+ * The animation duration could ONLY be smaller than
+ * the duration on the CSSTransition, but can NOT be
+ * bigger!
+ * 
+ * These transition CSS could be part of the Fade UI util
+ * component, instead of the chidlren of it (or as a default
+ * set of styles, when user want to have custom ones, they should
+ * pass different class names).
+ */
+
+.ShiftFade-enter {
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity .3s, transform .3s;
+}
+
+.ShiftFade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ShiftFade-exit {
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+.ShiftFade-exit-active {
+  opacity: 0;
+}

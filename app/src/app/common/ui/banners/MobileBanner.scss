@@ -1,0 +1,72 @@
+$max-height: 200px;
+$margin-top: 8px;
+
+.MobileBanner {
+  margin: $margin-top 8px 0 8px;
+  transform-origin: top;
+}
+
+.MobileBanner-top {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.MobileBanner-top-icon {
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.MobileBanner-top-title {
+  flex-grow: 1;
+}
+
+.MobileBanner-middle {
+  padding: 8px 8px 0 8px;
+}
+
+.MobileBanner-bottom {
+  padding: 0 0 8px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.MobileBanner-bottom .InkButton {
+  margin: 8px 8px 0 8px;
+  flex-shrink: 0;
+  flex-grow: 1;
+  box-sizing: border-box;
+  width: calc((100% - 32px) / 2);
+  min-width: 13.6rem;
+}
+
+/* fade animations */
+.MobileBanner-Fade-enter {
+  opacity: 0;
+  max-height: 0;
+  margin-top: 0;
+  transform: scaleY(0);
+  transition: .3s;
+}
+
+.MobileBanner-Fade-enter-active {
+  opacity: 1;
+  max-height: $max-height;
+  margin-top: $margin-top;
+  transform: scaleY(1);
+}
+
+.MobileBanner-Fade-exit {
+  opacity: 1;
+  max-height: $max-height;
+  margin-top: $margin-top;
+  transform: scaleY(1);
+  transition: .3s;
+}
+
+.MobileBanner-Fade-exit-active {
+  opacity: 0;
+  max-height: 0;
+  margin-top: 0;
+  transform: scaleY(0);
+}

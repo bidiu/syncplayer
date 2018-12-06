@@ -1,0 +1,21 @@
+.FakeExpandFade-enter {
+  opacity: 0;
+  transform: translateY(-16px) scaleY(0);
+}
+
+.FakeExpandFade-enter-active {
+  opacity: 1;
+  transform: translateY(0) scaleY(1); 
+  transition: opacity .3s, transform .3s;
+}
+
+.FakeExpandFade-exit {
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+}
+
+.FakeExpandFade-exit-active {
+  opacity: 0;
+  transform: translateY(-16px) scaleY(0);
+  transition: opacity .3s, transform .3s;
+}

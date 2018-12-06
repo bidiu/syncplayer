@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  litemessage_com:
+    build:
+      context: .
+      dockerfile: production.Dockerfile
+    image: litemessage-com:production
+    networks:
+      - inkbook
+
+networks:
+  inkbook:
+    external: true

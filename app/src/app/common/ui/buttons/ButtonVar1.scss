@@ -1,0 +1,24 @@
+@import '_common';
+
+.ButtonVar1 {
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 8px 12px;
+  transition: box-shadow .3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ButtonVar1:hover {
+  box-shadow: $box-shadow-focus;
+}
+
+.ButtonVar1-disable {
+  opacity: .3;
+}
+
+.ButtonVar1-disable:hover {
+  box-shadow: none;
+}

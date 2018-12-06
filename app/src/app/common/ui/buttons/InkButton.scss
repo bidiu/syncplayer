@@ -1,0 +1,15 @@
+@import '_common';
+
+.InkButton {
+  font-weight: $font-weight-primary;
+  cursor: pointer;
+  background: linear-gradient(80deg, #ff424e, #ff694f);
+  padding: 8px 16px;
+  border-radius: 2px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.InkButton:hover {
+  box-shadow: $box-shadow;
+}

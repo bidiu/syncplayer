@@ -1,0 +1,19 @@
+@import '_common';
+
+.Textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 70px;
+  padding: 12px;
+  margin-bottom: 8px;
+  font-size: $font-size-small;
+  font-weight: $font-weight-light;
+  font-family: $font-family-primary;
+  border: 2px solid #e2e2e2;
+  border-radius: 6px;
+  transition: .3s;
+}
+
+.Textarea-focused {
+  height: 118px;
+}

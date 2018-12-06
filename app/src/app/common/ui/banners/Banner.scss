@@ -1,0 +1,62 @@
+$height: 5.2rem;
+$margin-top: 8px;
+
+.Banner {
+  margin: $margin-top 8px 0 8px;
+  height: $height;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.Banner-icon {
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+.Banner-text {
+  flex-grow: 1;
+  margin-right: 16px;
+}
+
+.Banner-button {
+  flex-shrink: 0;
+  margin-left: 16px;
+  text-decoration: underline;
+}
+
+.Banner-close {
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+/* fade animations */
+.Banner-Fade-enter {
+  opacity: 0;
+  height: 0;
+  margin-top: 0;
+  transform: scaleY(0);
+  transition: .3s;
+}
+
+.Banner-Fade-enter-active {
+  opacity: 1;
+  height: $height;
+  margin-top: $margin-top;
+  transform: scaleY(1);
+}
+
+.Banner-Fade-exit {
+  opacity: 1;
+  height: $height;
+  margin-top: $margin-top;
+  transform: scaleY(1);
+  transition: .3s;
+}
+
+.Banner-Fade-exit-active {
+  opacity: 0;
+  height: 0;
+  margin-top: 0;
+  transform: scaleY(0);
+}

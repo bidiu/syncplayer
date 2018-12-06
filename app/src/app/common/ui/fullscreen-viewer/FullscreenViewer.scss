@@ -1,0 +1,86 @@
+@import '_common';
+
+$shade-opacity: .2;
+
+.FullscreenViewer-overlay {
+  position: fixed;
+  z-index: $z-index-fullscreen-overlay;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  box-sizing: border-box;
+  overflow: hidden; 
+}
+
+.FullscreenViewer-overlay-open {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.FullscreenViewer-overlay-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.FullscreenViewer-overlay-shade {
+  position: fixed;
+  z-index: $z-index-fullscreen-shade;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: $shade-opacity;
+}
+
+.FullscreenViewer-overlay-close {
+  position: fixed;
+  z-index: $z-index-fullscreen-overlay + 1;
+  top: 16px;
+  right: 32px;
+  color: $link-color-var1 !important;
+}
+
+// animation for content starts
+.FullscreenViewer-Fade-enter {
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.FullscreenViewer-Fade-enter-active {
+  opacity: 1;
+}
+
+.FullscreenViewer-Fade-exit {
+  opacity: 1;
+  transition: opacity .5s;
+}
+
+.FullscreenViewer-Fade-exit-active {
+  opacity: 0;
+}
+// animation for content ends
+
+// animation for shade starts
+.FullscreenViewer-Fade-shade-enter {
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.FullscreenViewer-Fade-shade-enter-active {
+  opacity: $shade-opacity;
+}
+
+.FullscreenViewer-Fade-shade-exit {
+  opacity: $shade-opacity;
+  transition: opacity .5s;
+}
+
+.FullscreenViewer-Fade-shade-exit-active {
+  opacity: 0;
+}
+// animation for shade ends
