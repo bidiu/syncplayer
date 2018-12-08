@@ -18,7 +18,7 @@ async function retrieve(id, projection = fields) {
 
 async function create(doc) {
   let room = await Room.create(doc);
-  return retrieve(room._id);
+  return retrieve(room.id);
 }
 
 exports.create = create;

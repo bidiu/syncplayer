@@ -16,7 +16,6 @@ const roomSchema = new Schema({
   },
   pageUrl: {
     type: String,
-    required: true,
     minlength: 1
   },
 }, {

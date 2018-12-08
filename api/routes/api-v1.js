@@ -55,6 +55,8 @@ router.get('/venue/booked', asyncWrapper(venueController.indexBooked));
  */
 router.get('/rooms/:roomId', asyncWrapper(roomController.retrieve));
 
+router.post('/rooms', asyncWrapper(roomController.create));
+
 
 /**
  * video related routes start

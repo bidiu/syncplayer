@@ -53,7 +53,7 @@ async function extractJiqimaoTv(pageUrl) {
 
 async function extractGeneric(pageUrl) {
   // TODO
-  return { url: 'https://test.video.url/', type: 'hls' };
+  throw new ApiError.NotImplemented();
 }
 
 /**

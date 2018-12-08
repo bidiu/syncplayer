@@ -1,10 +1,30 @@
 const roomService = require('../services/room');
+const videoService = require('../services/video');
 const Res = require('../common/models/responses');
-// const ApiError = require('../common/models/api-errors');
-// const { compressDoc } = require('../utils/common');
+const { compressDoc } = require('../utils/common');
 
+/**
+ * POST /api/v1/rooms
+ * 
+ * Create a room.
+ * 
+ * Either client provides `pageUrl`, or provides `videoUrl` & 
+ * `videoType`. If client provides both, `videoUrl` & `videoType`
+ * take precedence.
+ */
 async function create(req, res) {
-  // TODO
+  let { videoUrl, videoType, pageUrl } = req.body;
+  let doc = compressDoc({ videoUrl, videoType, pageUrl });
+
+  if (!doc.videoUrl) {
+    let videoInfo = await videoService.extractVideoInfo(pageUrl);
+    doc.videoUrl = videoInfo.url;
+    doc.videoType = videoInfo.type;
+  }
+
+  let data = await roomService.create(doc);
+  let payload = new Res.Ok({ data });
+  res.status(payload.status).json(payload);
 }
 
 /**
