@@ -3,6 +3,7 @@ const authController = require('../controllers/auth');
 const userController = require('../controllers/user');
 const venueController = require('../controllers/venue');
 const roomController = require('../controllers/room');
+const videoController = require('../controllers/video');
 
 const asyncWrapper = func =>
   async (req, res, next) => {
@@ -53,5 +54,11 @@ router.get('/venue/booked', asyncWrapper(venueController.indexBooked));
  * room realted routes start
  */
 router.get('/rooms/:roomId', asyncWrapper(roomController.retrieve));
+
+
+/**
+ * video related routes start
+ */
+router.get('/videos/info/extract', asyncWrapper(videoController.extractVideoInfo));
 
 module.exports = router;

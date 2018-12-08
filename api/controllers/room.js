@@ -3,6 +3,10 @@ const Res = require('../common/models/responses');
 // const ApiError = require('../common/models/api-errors');
 // const { compressDoc } = require('../utils/common');
 
+async function create(req, res) {
+  // TODO
+}
+
 /**
  * GET /api/v1/rooms/:roomId
  * 
@@ -17,3 +21,4 @@ async function retrieve(req, res) {
 }
 
 exports.retrieve = retrieve;
+exports.create = create;
