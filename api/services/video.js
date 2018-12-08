@@ -1,5 +1,6 @@
 const { URL } = require('url');
 const puppeteer = require('puppeteer');
+const { TimeoutError } = require('puppeteer/Errors');
 const ApiError = require('../common/models/api-errors');
 
 // domain => extractor
@@ -9,7 +10,6 @@ const extractorMap = new Map([
 
 /**
  * TODO support other video types (other than HLS) of jiqimao.tv
- * TODO handle and convert timeout error
  * TODO extract other info such as title
  */
 async function extractJiqimaoTv(pageUrl) {
@@ -36,10 +36,19 @@ async function extractJiqimaoTv(pageUrl) {
     }
   });
 
-  await page.goto(pageUrl);
-  await page.waitForFunction('window.indexFileRequested === true');
-  await browser.close();
-  return { url, type };
+  try {
+    await page.goto(pageUrl);
+    await page.waitForFunction('window.indexFileRequested === true');
+    await browser.close();
+    return { url, type };
+  } catch (err) {
+    if (err instanceof TimeoutError) {
+      throw new ApiError.NotImplemented({
+        message: "Failed to extract video info from given page URL."
+      });
+    }
+    throw err;
+  }
 }
 
 async function extractGeneric(pageUrl) {

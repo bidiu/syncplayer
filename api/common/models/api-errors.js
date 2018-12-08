@@ -46,6 +46,13 @@ const ERROR_TYPES = [
     }
     InternalErr.status = 500;
     return InternalErr;
+  })(),
+  (() => {
+    function NotImplemented({ message = 'Requested service is not implemented yet.', details, data } = {}) {
+      ApiError.call(this, message, details, data);
+    }
+    NotImplemented.status = 501;
+    return NotImplemented;
   })()
 ];
 

@@ -7,7 +7,8 @@ const ERROR_MAP = new Map([
   [ApiError.BadAuthentication, Res.UnAuth],
   [ApiError.NotFound, Res.NotFound],
   [ApiError.InternalErr, Res.ServerErr],
-  [ApiError.NoAuthorization, Res.Forbidden]
+  [ApiError.NoAuthorization, Res.Forbidden],
+  [ApiError.NotImplemented, Res.NotImplemented]
 ]);
 
 module.exports = function (err, req, res, next) {

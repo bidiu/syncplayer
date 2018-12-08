@@ -37,11 +37,16 @@ const RES_TYPES = [
     return NotFound;
   })(),
   (() => {
-    // 5xx
     function ServerErr({ message = 'Internal Server Error', details, data } = {}) {
       Res.call(this, 500, message, details, data);
     }
     return ServerErr;
+  })(),
+  (() => {
+    function NotImplemented({ message = 'Not Implemented', details, data } = {}) {
+      Res.call(this, 501, message, details, data);
+    }
+    return NotImplemented;
   })()
 ];
 
