@@ -134,6 +134,7 @@ class HandshakeManager extends EventEmitter {
           socket.close(undefined, 'HANDSHAKE_FAILED');
         }
 
+      // eslint-disable-next-line
       }).bind(this); // end of _messageHandler
 
       socket.on('data', socket._messageHandler);

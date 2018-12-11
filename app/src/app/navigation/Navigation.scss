@@ -1,0 +1,43 @@
+@import '_common';
+
+// only content
+$default-nav-height: 70px;
+
+.Navigation {
+  display: flex;
+  padding: 16px 0;
+  justify-content: flex-start;
+  height: $default-nav-height;
+}
+
+.Navigation > div {
+  line-height: $default-nav-height;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.Navigation-logo {
+ padding: 0 16px;
+}
+
+.Navigation-tab {
+  padding: 0 16px;
+}
+
+.Navigation-logo a, .Navigation-logo img {
+  display: block;
+  height: 100%;
+}
+
+.Navigation-text-link {
+  font-size: 1.8rem;
+  font-weight: $font-weight-bold;
+}
+
+.Navigation-text-link-selected {
+  font-weight: $font-weight-black;
+}
+
+.Navigation-text-link:hover {
+  text-decoration: underline;
+}
