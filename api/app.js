@@ -20,7 +20,7 @@ const SyncServer = require('./ws/sync-server');
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:3010',
+  origin: 'http://localhost:3000',
   // passing cookies, auth headers
   credentials: true
 }

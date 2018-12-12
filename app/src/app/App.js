@@ -10,10 +10,15 @@ import Navigation from './navigation/Navigation';
 import Home from './home/Home';
 import RoomHistory from './room-history/RoomHistory';
 import About from './about/About';
+import Room from './room/Room';
 import { getScrollBarWidth } from './utils/domUtils';
+import { getPayload } from './utils/epicUtils';
+import resources from './common/rest/resources';
 import env from './env/environment';
 
+import { addDemoRoom } from './common/state/rooms/index';
 import { setScrollbarWidth } from './common/state/newui/index';
+
 import './App.css';
 
 class App extends Component {
@@ -25,8 +30,20 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.createDemoRoom();
     // set scrollbar width
     this.props.setScrollbarWidth(getScrollBarWidth());
+  }
+
+  async createDemoRoom() {
+    try {
+      let response = await fetch(resources.createRoom(env.demoVideoInfo));
+      let { data: room } = await getPayload(response);
+      this.props.addDemoRoom(room);
+
+    } catch (err) {
+      alert(err.message);
+    }
   }
 
   render() {
@@ -43,6 +60,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/rooms" component={RoomHistory} />
           <Route exact path="/about" component={About} />
+          <Route exact path="/r/:roomId" component={Room} />
         </div>
       </SyncClientContext.Provider>
     );
@@ -56,6 +74,9 @@ export default withRouter(connect(
   dispatch => ({
     setScrollbarWidth(width) {
       dispatch(setScrollbarWidth(width));
+    },
+    addDemoRoom(room) {
+      dispatch(addDemoRoom(room));
     }
   })
 )(App));

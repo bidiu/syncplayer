@@ -17,6 +17,8 @@ const onResponse = (res) => {
   );
 }
 
+const getPayload = onResponse;
+
 /**
  * Convert an error response to a notification entry.
  * 
@@ -41,4 +43,4 @@ const toNotificationEntry = (errResponse, {
   return new NotificationEntry({ title, message, type, timeout });
 };
 
-export { onResponse, toNotificationEntry };
+export { onResponse, toNotificationEntry, getPayload };

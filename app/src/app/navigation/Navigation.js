@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 
 import './Navigation.css';
 import longLogo from '../assets/long_logo.svg';
-import shortLogo from '../assets/short_logo.svg';
 
 // <Link to="/">Home</Link>
 class Navigation extends Component {

@@ -1,0 +1,80 @@
+@import '_common';
+
+$desktop-form-height: 60px;
+$desktop-form-width: 680px;
+$mobile-form-height: 48px;
+$mobile-form-width: 90%;
+$border-radius: 4px;
+
+.PageUrlInput {
+  position: relative;
+  height: calc(100vh - 102px)
+}
+
+.PageUrlInput-form {
+  position: absolute;
+  top: 50%; 
+  right: 50%;
+  transform: translate(50%, -50%);
+  display: flex;
+  border-radius: $border-radius;
+  width: $desktop-form-width;
+  height: $desktop-form-height;
+  box-shadow: $box-shadow-var2;
+  transition: box-shadow .3s;
+}
+
+.PageUrlInput-form-focused, 
+.PageUrlInput-form:hover {
+  box-shadow: $box-shadow-var4;
+}
+
+.VIEWPORT_MOBILE .PageUrlInput-form {
+  height: $mobile-form-height;
+  width: $mobile-form-width;
+}
+
+.PageUrlInput-url-input {
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: inline-block;
+  border: none;
+  padding: 0 0 0 1.8rem;
+  border-radius: $border-radius 0 0 $border-radius;
+  font-size: 1.8rem;
+  font-weight: $font-weight-light;
+  width: 40px;
+}
+
+.VIEWPORT_MOBILE .PageUrlInput-url-input {
+  padding: 0 0 0 1.4rem;
+  font-size: 1.4rem;
+}
+
+.PageUrlInput-submit {
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: inline-block;
+  border-radius: 0 $border-radius $border-radius 0;
+  width: $desktop-form-height;
+  font-size: 2.2rem;
+  background-color: #ffffff;
+  color: $theme-color-var1;
+  cursor: pointer;
+  transition: background-color .1s, color .1s;
+}
+
+.PageUrlInput-submit:hover,
+.PageUrlInput-submit:focus {
+  background-color: $theme-color-var1;
+  color: #ffffff;
+}
+
+.VIEWPORT_MOBILE .PageUrlInput-submit {
+  width: $mobile-form-height;
+  font-size: 1.8rem;
+}
+
+.PageUrlInput-submit .fa-spinner {
+  animation: rotate-full-round 1.5s linear infinite both;
+}
