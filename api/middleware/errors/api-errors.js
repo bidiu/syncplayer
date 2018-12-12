@@ -3,6 +3,7 @@ const Res = require('../../common/models/responses');
 const env = require('../../env/env');
 
 const ERROR_MAP = new Map([
+  [ApiError.CorsPolicy, Res.NoContent],
   [ApiError.BadReq, Res.BadReq],
   [ApiError.BadAuthentication, Res.UnAuth],
   [ApiError.NotFound, Res.NotFound],

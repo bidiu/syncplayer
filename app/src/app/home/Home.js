@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withRouter, Redirect } from 'react-router';
 import PageUrlInput from './page-url-input/PageUrlInput';
+import Demo from './demo/Demo';
 import resources from '../common/rest/resources';
 import { getPayload } from '../utils/epicUtils';
 
@@ -60,6 +61,8 @@ class Home extends Component {
           requesting={requesting}
           onChange={this.handlePageUrlChange}
           onSubmit={this.handlePageUrlSubmit} />
+        <Demo />
+        <div style={{ height: 1000, color: '#ffffff' }}>Fake</div>
       </div>
     );
   }

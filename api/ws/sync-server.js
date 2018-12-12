@@ -81,8 +81,13 @@ class SyncServer {
     try {
       if (!room) {
         let { videoUrl: url, videoType: type } = await roomService.retrieve(roomId);
-        room = new Room(roomId, { videoInfo: { url, type } });
-        this.rooms.set(roomId, room);
+        // handle race condition here
+        if (this.rooms.has(roomId)) {
+          room = this.rooms.get(roomId);
+        } else {
+          room = new Room(roomId, { videoInfo: { url, type } });
+          this.rooms.set(roomId, room);
+        }
       }
       // join the room
       peer.setProperty(roomId, {
@@ -137,11 +142,11 @@ class SyncServer {
     let now = getCurTimestamp();
 
     if (!room) {
-      console.warn(`a peer is sending player action data to a nonexistent room (${roomId})`);
+      console.warn(`a peer is sending player action data to a nonexistent room (${peer.uuid} | ${roomId})`);
       return;
     }
     if (!room.peers.has(peer.uuid)) {
-      console.warn(`a peer is sending player action data to a room it is not in (${roomId})`);
+      console.warn(`a peer is sending player action data to a room it is not in (${peer.uuid} | ${roomId})`);
       return;
     }
 

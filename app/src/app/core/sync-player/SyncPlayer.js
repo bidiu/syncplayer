@@ -11,6 +11,12 @@ import './SyncPlayer.css';
  * 
  * You can pass a `className` prop to style the player container,
  * i.e., its width.
+ * 
+ * Properties:
+ *  - roomId
+ *  - playerId
+ *  - className
+ *  - any props that underlying player supports
  */
 class SyncPlayer extends Component {
   constructor(props) {

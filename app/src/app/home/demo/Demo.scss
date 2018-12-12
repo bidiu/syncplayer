@@ -1,0 +1,20 @@
+@import '_common';
+
+.Demo {
+  color: $text-color-var2;
+  padding: 60px 0;
+}
+
+.Demo-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Demo-player-container {
+  flex-grow: 1;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 50%;
+  min-width: 380px;
+  padding: 10px 20px;
+}

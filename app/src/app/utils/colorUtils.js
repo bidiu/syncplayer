@@ -56,4 +56,20 @@ function pickColor(hexes, opts) {
   return best
 }
 
-export { pickColor };
+function getTransitionColor(start, end, percentage) {
+  let r1 = parseInt(start.slice(1, 3), 16);
+  let g1 = parseInt(start.slice(3, 5), 16);
+  let b1 = parseInt(start.slice(5, 7), 16);
+
+  let r2 = parseInt(end.slice(1, 3), 16);
+  let g2 = parseInt(end.slice(3, 5), 16);
+  let b2 = parseInt(end.slice(5, 7), 16);
+
+  let r = Math.round(r1 + (r2 - r1) * percentage).toString(16);
+  let g = Math.round(g1 + (g2 - g1) * percentage).toString(16);
+  let b = Math.round(b1 + (b2 - b1) * percentage).toString(16);
+
+  return '#' + r + g + b;
+}
+
+export { pickColor, getTransitionColor };

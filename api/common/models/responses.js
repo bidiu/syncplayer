@@ -13,6 +13,12 @@ const RES_TYPES = [
     return Ok;
   })(),
   (() => {
+    function NoContent({ message = 'No Content', details, data } = {}) {
+      Res.call(this, 204, message, details, data);
+    }
+    return NoContent;
+  })(),
+  (() => {
     function BadReq({ message = 'Bad Request', details, data } = {}) {
       Res.call(this, 400, message, details, data);
     }

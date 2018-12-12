@@ -16,11 +16,20 @@ const errorHandler = require('./middleware/errors/errors');
 const apiV1 = require('./routes/api-v1');
 const env = require('./env/env');
 const SyncServer = require('./ws/sync-server');
+const ApiError = require('./common/models/api-errors');
 
 const app = express();
 
+const whitelist = ['http://localhost:3000', 'http://192.168.0.14:3000'];
+
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new ApiError.CorsPolicy(), false);
+    }
+  },
   // passing cookies, auth headers
   credentials: true
 }

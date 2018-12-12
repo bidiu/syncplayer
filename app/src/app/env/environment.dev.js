@@ -3,7 +3,7 @@ export default {
   initPeerUrls: [
     'ws://45.79.182.46:1113'
   ],
-  apiBase: 'http://localhost:4010/api/v1',
+  apiBase: 'http://192.168.0.14:4010/api/v1',
   // syncServerUrl: 'ws://localhost:4010'
   syncServerUrl: 'ws://192.168.0.14:4010',
   demoVideoInfo: {

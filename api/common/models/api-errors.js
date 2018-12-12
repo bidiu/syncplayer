@@ -12,6 +12,13 @@ ApiError.prototype.constructor = ApiError;
 /* more specific errors */
 const ERROR_TYPES = [
   (() => {
+    function CorsPolicy({ message = 'Not allowed by CORS policy.', details, data } = {}) {
+      ApiError.call(this, message, details, data);
+    }
+    CorsPolicy.status = 204;
+    return CorsPolicy;
+  })(),
+  (() => {
     function BadReq({ message = 'Request is bad.', details, data } = {}) {
       ApiError.call(this, message, details, data);
     }
