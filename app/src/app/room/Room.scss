@@ -1,4 +1,55 @@
+@import "_common";
+
 .Room {
-  max-width: 1024px;
-  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.VIEWPORT_MOBILE .Room {
+  padding: 0;
+}
+
+.Room-flex-main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  box-sizing: border-box;
+  max-width: 948px;
+  min-width: 0;
+}
+
+.Room-flex-side {
+  flex-shrink: 0;
+  flex-grow: 0;
+  box-sizing: border-box;
+  margin: 0 0 0 16px;
+  width: 284px;
+}
+
+.Room-sync-player {
+  width: 100%;
+}
+
+.Room-sync-player video {
+  width: 100%;
+}
+
+.VIEWPORT_DESKTOP .Room-sync-player video {
+  min-height: 320px;
+}
+
+.Room-sync-player-title {
+  padding: 16px 0;
+  font-size: 1.8rem;
+  font-weight: $font-weight-bold;
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+.VIEWPORT_MOBILE .Room-sync-player-title {
+  font-size: 1.4rem;
 }

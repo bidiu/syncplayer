@@ -64,6 +64,7 @@ class Room extends Component {
 
   render() {
     let { room, notFound } = this.state;
+    let { viewportType } = this.props;
 
     if (notFound) {
       return (
@@ -83,12 +84,28 @@ class Room extends Component {
 
     return (
       <div className="Room">
-        <div className="Room-player-flex-container">
-          <SyncPlayer
-            playerId={this.playerId}
+        {/* main */}
+        <div className="Room-flex-main">
+          <SyncPlayer 
             roomId={room.id}
+            playerId={this.playerId}
+            className="Room-sync-player"
             video={{ url: room.videoUrl, type: room.videoType }} />
+          <div className="text-truncate Room-sync-player-title">
+            {room.pageUrl ? (
+              <a href={room.pageUrl}>{room.pageTitle || "No Title"}</a>
+            ) : (
+              <div>{room.pageTitle || "No Title"}</div>
+            )}
+          </div>
         </div>
+
+        {/* sidebar */}
+        {viewportType === 'VIEWPORT_DESKTOP' && (
+          <div className="Room-flex-side">
+            Feature not implemented
+          </div>
+        )}
       </div>
     );
   }
@@ -96,6 +113,7 @@ class Room extends Component {
 
 export default connect(
   state => ({
+    viewportType: state.ui.viewportType,
     rooms: state.rooms.rooms
   }),
   dispatch => ({
