@@ -249,6 +249,16 @@ html {
   }
 }
 
+@keyframes up-down-alternate {
+  from {
+    transform: translateY(-4px);
+  }
+  to {
+    transform: translateY(4px);
+  }
+}
+
+
 button:focus {
   box-shadow: $focus-outline;
 }

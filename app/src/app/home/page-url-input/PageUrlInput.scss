@@ -79,3 +79,22 @@ $border-radius: 4px;
 .PageUrlInput-submit .fa-spinner {
   animation: rotate-full-round 1.5s linear infinite both;
 }
+
+@keyframes custom-up-down-alternate {
+  from {
+    transform: translate(-50%, -4px);
+  }
+  to {
+    transform: translate(-50%, 4px);
+  }
+}
+
+.PageUrlInput-arrow-hint {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  bottom: 72px;
+  font-size: 2.8rem;
+  color: $theme-color-var2;
+  animation: custom-up-down-alternate 1.5s infinite alternate both;
+}

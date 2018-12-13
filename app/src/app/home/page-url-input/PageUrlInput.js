@@ -44,6 +44,9 @@ class PageUrlInput extends Component {
               (<i className="fas fa-arrow-right"></i>)}
           </button>
         </form>
+
+        {/* down arrow hint */}
+        <i className="fas fa-chevron-down PageUrlInput-arrow-hint"></i>
       </div>
     );
   }
