@@ -9,6 +9,7 @@ import './DemoPlayer.css';
  *  - syncClient
  *  - roomId
  *  - video
+ *  - className
  */
 class DemoPlayer extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class DemoPlayer extends Component {
   }
 
   render() {
-    let { roomId, video } = this.props;
+    let { roomId, video, className } = this.props;
 
     return (
       <div className="DemoPlayer">
@@ -26,7 +27,7 @@ class DemoPlayer extends Component {
           roomId={roomId}
           video={video}
           mutex={false}
-          className="DemoPlayer-sync-player" />
+          className={className} />
       </div>
     );
   }

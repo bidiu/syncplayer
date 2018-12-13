@@ -19,7 +19,7 @@ import 'slick-carousel/slick/slick-theme.css';
 // initialize libraries
 ElementQueries.listen();
 AOS.init({
-  once: true,
+  // once: true,
   duration: 300
 });
 

@@ -62,7 +62,6 @@ class Home extends Component {
           onChange={this.handlePageUrlChange}
           onSubmit={this.handlePageUrlSubmit} />
         <Demo />
-        <div style={{ height: 1000, color: '#ffffff' }}>Fake</div>
       </div>
     );
   }

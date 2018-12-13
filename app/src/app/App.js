@@ -53,7 +53,6 @@ class App extends Component {
       });
 
     Observable.fromEvent(window, 'scroll', { passive: true })
-      // .throttleTime(1000 / 30)
       .subscribe(() => {
         requestAnimationFrame(() => {
 
