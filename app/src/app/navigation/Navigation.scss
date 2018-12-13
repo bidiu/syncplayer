@@ -5,14 +5,14 @@ $default-nav-height: 70px;
 $mobile-nav-hieght: 48px;
 
 .Navigation {
-  overflow-x: hidden;
+  overflow: hidden;
   padding: 16px 0;
 }
 
 .Navigation-flex-container {
   // following hide the scroll bar while still scrollable
-  margin-bottom: -32px; /* maximum width of scrollbar */
-  padding-bottom: 32px; /* maximum width of scrollbar */
+  margin-bottom: -50px; /* maximum width of scrollbar */
+  padding-bottom: 50px; /* maximum width of scrollbar */
   overflow-y: hidden;
   overflow-x: scroll;
 
