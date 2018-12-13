@@ -2,6 +2,7 @@ const { URL } = require('url');
 const puppeteer = require('puppeteer');
 const { TimeoutError } = require('puppeteer/Errors');
 const ApiError = require('../common/models/api-errors');
+const { isValidUrl } = require('../utils/common');
 
 // domain => extractor
 const extractorMap = new Map([
@@ -24,6 +25,8 @@ async function extractJiqimaoTv(pageUrl) {
   let url = null;
   // for now it's hardcoded
   let type = 'hls';
+  // video's title (page's title)
+  let title = undefined;
   
   page.on('request', request => {
     if (request.url().endsWith('.m3u8')) {
@@ -38,9 +41,10 @@ async function extractJiqimaoTv(pageUrl) {
 
   try {
     await page.goto(pageUrl);
+    title = await page.title();
     await page.waitForFunction('window.indexFileRequested === true');
     await browser.close();
-    return { url, type };
+    return { url, type, title };
   } catch (err) {
     if (err instanceof TimeoutError) {
       throw new ApiError.NotImplemented({
@@ -77,4 +81,20 @@ async function extractVideoInfo(pageUrl) {
   return extractor(pageUrl);
 }
 
+async function extractVideoTitle(pageUrl) {
+  if (!isValidUrl(pageUrl)) {
+    throw new ApiError.BadReq({ message: 'Invalid URL given.' });
+  }
+
+  let browser = await puppeteer.launch({
+    executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+  let page = await browser.newPage();
+  await page.goto(pageUrl);
+  let title = await page.title();
+  await browser.close();
+  return title;
+}
+
 exports.extractVideoInfo = extractVideoInfo;
+exports.extractVideoTitle = extractVideoTitle;

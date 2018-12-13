@@ -50,38 +50,41 @@ class Demo extends Component {
   }
 
   componentDidMount() {
-    Observable.fromEvent(window, 'scroll', { passive: true })
-      .subscribe(() => {
-        requestAnimationFrame(() => {
+    this.subscriptions = [
+      Observable.fromEvent(window, 'scroll', { passive: true })
+        .subscribe(() => {
+          requestAnimationFrame(() => {
 
-          let vh = this.props.viewportSize.height;
-          if (!vh) { return; }
-          let low = Math.round(vh * 0.5);
-          let high = Math.round(vh * 0.8);
-          let cur = window.scrollY;
+            let vh = this.props.viewportSize.height;
+            if (!vh) { return; }
+            let low = Math.round(vh * 0.5);
+            let high = Math.round(vh * 0.8);
+            let cur = window.scrollY;
 
-          // player's outer div, instead of the player itself
-          let syncPlayers = Array.from(document.querySelectorAll('.DemoPlayer-sync-player'));
-          if (!syncPlayers.length) { return; }
+            // player's outer div, instead of the player itself
+            let syncPlayers = Array.from(document.querySelectorAll('.DemoPlayer-sync-player'));
+            if (!syncPlayers.length) { return; }
 
-          if (cur < low) {
-            syncPlayers[0].style.transform = '';
-            syncPlayers[1].style.transform = '';
-          } else if (cur > high) {
-            syncPlayers[0].style.transform = 'translateX(0)';
-            syncPlayers[1].style.transform = 'translateX(0)';
-          } else {
-            let percentage = (cur - low) / (high - low);
-            syncPlayers[0].style.transform = `translateX(${Math.round(getTransitionNum(-75, 0, percentage))}%)`;
-            syncPlayers[1].style.transform = `translateX(${Math.round(getTransitionNum(75, 0, percentage))}%)`;
-          }
-        });
-      });
+            if (cur < low) {
+              syncPlayers[0].style.transform = '';
+              syncPlayers[1].style.transform = '';
+            } else if (cur > high) {
+              syncPlayers[0].style.transform = 'translateX(0)';
+              syncPlayers[1].style.transform = 'translateX(0)';
+            } else {
+              let percentage = (cur - low) / (high - low);
+              syncPlayers[0].style.transform = `translateX(${Math.round(getTransitionNum(-75, 0, percentage))}%)`;
+              syncPlayers[1].style.transform = `translateX(${Math.round(getTransitionNum(75, 0, percentage))}%)`;
+            }
+          }); // end of requestAnimationFrame
+        })
+    ];
   }
 
   componentWillUnmount() {
     this.syncClients[0].close();
     this.syncClients[1].close();
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   render() {

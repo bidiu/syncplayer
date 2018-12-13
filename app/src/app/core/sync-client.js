@@ -27,10 +27,13 @@ class SyncClient extends EventEmitter {
     super();
     this.uuid = uuidv1();
     this.config = { ...defaultConfig, ...config };
+    
     // create underlying node
     this.node = new Node(this.uuid);
     // create the handshake manager
     this.handshake = new HandshakeManager(this.node);
+    // pending rooms to join right after connected to sync server
+    this.pendingRoomIds = [];
 
     this.node.on(`message/${messageTypes.playerAction}`, this.handlePlayerAction);
     this.node.on('peerconnect', this.handlePeerConnect);
@@ -43,7 +46,17 @@ class SyncClient extends EventEmitter {
    * TODO add events of connected or failure
    */
   connect() {
+    // connect to the sync server
     this.node.createConnection(this.config.syncServerUrl);
+
+    let timer = setInterval(() => {
+
+      if (this.isConnected()) {
+        clearInterval(timer);
+        this.pendingRoomIds.forEach(roomId => this.joinRoom(roomId));
+        this.pendingRoomIds = [];
+      }
+    }, 1000);
   }
 
   isConnected() {
@@ -58,11 +71,16 @@ class SyncClient extends EventEmitter {
   }
 
   /**
+   * If not connected yet, joining will happen as soon as
+   * client is connected to sync server after.
+   * 
    * TODO when failure happens
    */
   joinRoom(roomId) {
     if (this.isConnected()) {
       this.getSyncServer().sendJson(joinRoom({ roomId }));
+    } else {
+      this.pendingRoomIds.push(roomId);
     }
   }
 
@@ -162,7 +180,8 @@ class SyncClient extends EventEmitter {
   }
 
   /**
-   * Do the cleanup.
+   * Do the cleanup. After, the object could not be used
+   * anymore.
    */
   close() {
     this.removeAllListeners();

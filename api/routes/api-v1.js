@@ -63,4 +63,6 @@ router.post('/rooms', asyncWrapper(roomController.create));
  */
 router.get('/videos/info/extract', asyncWrapper(videoController.extractVideoInfo));
 
+router.get('/videos/title/extract', asyncWrapper(videoController.extractVideoTitle))
+
 module.exports = router;

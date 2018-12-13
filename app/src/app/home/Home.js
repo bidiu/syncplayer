@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { withRouter, Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 import PageUrlInput from './page-url-input/PageUrlInput';
 import Demo from './demo/Demo';
 import resources from '../common/rest/resources';
@@ -39,12 +39,10 @@ class Home extends Component {
         let response = await fetch(resources.createRoom({ pageUrl }));
         let { data: room } = await getPayload(response);
         this.props.unshiftRoom(room);
-        this.setState({ roomToRedirect: room.id });
-  
+        this.setState({ requesting: false, roomToRedirect: room.id });
+        
       } catch (err) {
         alert(err.message);
-  
-      } finally {
         this.setState({ requesting: false });
       }
     });
@@ -67,11 +65,11 @@ class Home extends Component {
   }
 }
 
-export default withRouter(connect(
+export default connect(
   state => ({}),
   dispatch => ({
     unshiftRoom(room) {
       dispatch(unshiftRoom(room));
     }
   })
-)(Home));
+)(Home);

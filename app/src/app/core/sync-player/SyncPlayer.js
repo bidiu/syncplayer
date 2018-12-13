@@ -9,6 +9,31 @@ import './SyncPlayer.css';
  * identify the player from other SyncPlayers in the same
  * application instance.
  * 
+ * The player won't take care of joining the room specified
+ * by the given `roomId`, so you should join the room outside
+ * this component. And the timing could be tricky here.
+ * 
+ * You can pass the `roomId` first to render this component, 
+ * and then try to join the room. Before joining the room,
+ * player will still send action data to sync server with the
+ * provided `roomId`. However, sync server won't do anything 
+ * becasuse you are not in the room yet. So, even though you 
+ * can join the room after, you'd still better to join the 
+ * room before, or at least immediately after, you render this 
+ * component.
+ * 
+ * Another tricky timing issue is about `SyncClient`. You don't 
+ * need to pass it explicitly; it's captured using React Context.
+ * At the point this component is rendered, `SyncClient` might
+ * not have connected to sync server yet. It won't cause any
+ * severe problem here, but no action data whatsoever will be
+ * sent to sync server. As soon as `SyncClient` is connected,
+ * the problem in question will be fixed automatically. Still,
+ * it's better to connect and join room first before rendering
+ * this component.
+ * 
+ * For more about these timing issues, read `SyncClient` doc.
+ * 
  * You can pass a `className` prop to style the player container,
  * i.e., its width.
  * 
@@ -16,7 +41,8 @@ import './SyncPlayer.css';
  *  - roomId
  *  - playerId
  *  - className
- *  - any props that underlying player supports
+ *  - any props that underlying player supports:
+ *      - video.url, video.type, etc.
  */
 class SyncPlayer extends Component {
   constructor(props) {

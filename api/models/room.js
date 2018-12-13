@@ -18,6 +18,10 @@ const roomSchema = new Schema({
     type: String,
     minlength: 1
   },
+  pageTitle: {
+    type: String,
+    minlength: 1
+  },
 }, {
   timestamps: true,
   toJSON: { virtuals: true },

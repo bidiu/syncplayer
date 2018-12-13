@@ -36,7 +36,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // TODO create a room for demo
+    // create a room for demo
     this.createDemoRoom();
 
     // set scrollbar width
@@ -45,34 +45,39 @@ class App extends Component {
     // update viewport size
     let { width, height } = getViewportDimension();
     this.props.setViewportSize(width, height);
-    Observable.fromEvent(window, 'resize', { passive: true })
-      .debounceTime(1000)
-      .subscribe(() => {
-        let { width, height } = getViewportDimension();
-        this.props.setViewportSize(width, height);
-      });
 
-    Observable.fromEvent(window, 'scroll', { passive: true })
-      .subscribe(() => {
-        requestAnimationFrame(() => {
-
-          let vh = this.props.viewportSize.height;
-          if (!vh) { return; }
-          let low = Math.round(vh * 0.5);
-          let high = Math.round(vh * 0.8);
-          let cur = window.scrollY;
-
-          if (cur < low) {
-            document.body.style.backgroundColor = '';
-          } else if (cur > high) {
-            document.body.style.backgroundColor = bodyBgDarkColor;
-          } else {
-            let percentage = (cur - low) / (high - low);
-            let transitionColor = getTransitionColor('#ffffff', bodyBgDarkColor, percentage);
-            document.body.style.backgroundColor = transitionColor;
-          }
-        });
-      });
+    this.subscriptions = [
+      Observable.fromEvent(window, 'resize', { passive: true })
+        .debounceTime(1000)
+        .subscribe(() => {
+          let { width, height } = getViewportDimension();
+          this.props.setViewportSize(width, height);
+        }),
+      
+      Observable.fromEvent(window, 'scroll', { passive: true })
+        .subscribe(() => {
+          requestAnimationFrame(() => {
+  
+            if (this.props.location.pathname !== '/') { return; }
+  
+            let vh = this.props.viewportSize.height;
+            if (!vh) { return; }
+            let low = Math.round(vh * 0.5);
+            let high = Math.round(vh * 0.8);
+            let cur = window.scrollY;
+  
+            if (cur < low) {
+              document.body.style.backgroundColor = '';
+            } else if (cur > high) {
+              document.body.style.backgroundColor = bodyBgDarkColor;
+            } else {
+              let percentage = (cur - low) / (high - low);
+              let transitionColor = getTransitionColor('#ffffff', bodyBgDarkColor, percentage);
+              document.body.style.backgroundColor = transitionColor;
+            }
+          }); // end of requestAnimationFrame
+        }) // end of subscribe
+    ];
   }
 
   async createDemoRoom() {
@@ -88,6 +93,8 @@ class App extends Component {
 
   componentWillUnmount() {
     this.syncClient.close();
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    document.body.style.backgroundColor = '';
   }
 
   render() {

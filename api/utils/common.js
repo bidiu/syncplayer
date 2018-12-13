@@ -1,3 +1,5 @@
+const { URL } = require('url');
+
 function compressDoc(doc) {
   for (let [k, v] of Object.entries(doc)) {
     if (typeof v === 'undefined') {
@@ -17,6 +19,19 @@ const isValidJson = (json) => {
     return true;
   } catch (e) { }
   return false;
+};
+
+const isValidUrl = (url) => {
+  try {
+    new URL(url);
+    return true;
+
+  } catch (err) {
+    if (err instanceof TypeError) {
+      return false;
+    }
+    throw err;
+  }
 };
 
 /**
@@ -55,6 +70,7 @@ function mapToObj(map) {
 
 exports.compressDoc = compressDoc;
 exports.isValidJson = isValidJson;
+exports.isValidUrl = isValidUrl;
 exports.randomInt = randomInt;
 exports.pickItems = pickItems;
 exports.mapToObj = mapToObj;

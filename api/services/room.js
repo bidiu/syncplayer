@@ -1,7 +1,7 @@
 const Room = require('../models/room');
 const ApiError = require('../common/models/api-errors');
 
-const fields = `videoUrl videoType pageUrl createdAt updatedAt`;
+const fields = `videoUrl videoType pageUrl pageTitle createdAt updatedAt`;
 const defaultSort = { _id: 1 };
 
 async function index(filters = {}, { sort = defaultSort, limit = 20, projection = fields } = {}) {
