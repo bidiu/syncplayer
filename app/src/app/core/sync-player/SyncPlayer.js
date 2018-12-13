@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SyncClientContext from '../sync-client-context';
-import VideoPlayer from '../../common/ui/video-player/VideoPlayer';
+import VideoPlayer from '../video-player/VideoPlayer';
 
 import './SyncPlayer.css';
 

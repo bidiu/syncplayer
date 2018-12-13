@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DPlayer from 'dplayer';
-import { capitalize } from '../../../utils/commonUtils';
+import { capitalize } from '../../utils/commonUtils';
 
 import 'dplayer/dist/DPlayer.min.css';
 import './VideoPlayer.css';
