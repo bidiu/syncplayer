@@ -2,18 +2,37 @@
 
 // only content
 $default-nav-height: 70px;
+$mobile-nav-hieght: 48px;
 
 .Navigation {
-  display: flex;
+  overflow-x: hidden;
   padding: 16px 0;
+}
+
+.Navigation-flex-container {
+  // following hide the scroll bar while still scrollable
+  margin-bottom: -32px; /* maximum width of scrollbar */
+  padding-bottom: 32px; /* maximum width of scrollbar */
+  overflow-y: hidden;
+  overflow-x: scroll;
+
+  display: flex;
   justify-content: flex-start;
   height: $default-nav-height;
 }
 
-.Navigation > div {
+.VIEWPORT_MOBILE .Navigation-flex-container {
+  height: $mobile-nav-hieght;
+}
+
+.Navigation-flex-container > div {
   line-height: $default-nav-height;
   flex-grow: 0;
   flex-shrink: 0;
+}
+
+.VIEWPORT_MOBILE .Navigation-flex-container > div {
+  line-height: $mobile-nav-hieght;
 }
 
 .Navigation-logo {
@@ -27,6 +46,11 @@ $default-nav-height: 70px;
 .Navigation-logo a, .Navigation-logo img {
   display: inline-block;
   height: $default-nav-height;
+}
+
+.VIEWPORT_MOBILE .Navigation-logo a, 
+.VIEWPORT_MOBILE .Navigation-logo img {
+  height: $mobile-nav-hieght;
 }
 
 .Navigation-text-link {

@@ -13,7 +13,7 @@ $border-radius: 4px;
 
 .PageUrlInput-form {
   position: absolute;
-  top: 50%; 
+  top: 35%; 
   right: 50%;
   transform: translate(50%, -50%);
   display: flex;
@@ -94,6 +94,7 @@ $border-radius: 4px;
   position: absolute;
   left: 50%;
   bottom: 72px;
+  z-index: -1;
   font-size: 2.8rem;
   color: $theme-color-var2;
   animation: custom-up-down-alternate 1.5s infinite alternate both;
