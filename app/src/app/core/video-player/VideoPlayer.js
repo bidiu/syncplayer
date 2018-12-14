@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DPlayer from 'dplayer';
+import GenericPlayer from '../generic-player';
 import { capitalize } from '../../utils/commonUtils';
 
 import 'dplayer/dist/DPlayer.min.css';
@@ -39,10 +40,14 @@ class VideoPlayer extends Component {
       container: document.querySelector(`.${container}`),
       ...props
     });
+    // generic player is easier to use, and 
+    // more consistent across different video
+    // players such as Youtube iframe and Dplayer
+    this.genericPlayer = new GenericPlayer(this.player);
 
     for (let [eventName, handler] of Object.entries(events)) {
       this.player.on(eventName, () => {
-        handler(this.player);
+        handler(this.genericPlayer);
       })
     }
   }

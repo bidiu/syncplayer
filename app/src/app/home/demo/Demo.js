@@ -120,9 +120,9 @@ class Demo extends Component {
             Playback Synchronization over the Internet
           </h1>
           <div className="Demo-text-desc">
-            Play around with the demo above to see how it works
-            (it doesn't work on mobile devices that only support
-            playing at most one video simultaneously)
+            Play around with the demo above to see how it works.
+            Note the demo doesn't work on mobile devices which only 
+            support playing one video at most simultaneously.
           </div>
         </div>
       </div>

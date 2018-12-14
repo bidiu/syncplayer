@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SyncClientContext from '../sync-client-context';
 import VideoPlayer from '../video-player/VideoPlayer';
+import YtbPlayer from '../ytb-player/YtbPlayer';
 
 import './SyncPlayer.css';
 
@@ -86,7 +87,7 @@ class SyncPlayer extends Component {
 
   handlePlayFromServer = (roomId) => {
     if (this.props.roomId !== roomId) { return; }
-    let player = this.videoPlayerRef.current.player;
+    let player = this.videoPlayerRef.current.genericPlayer;
     
     if (player.video.paused) {
       player.play();
@@ -95,38 +96,44 @@ class SyncPlayer extends Component {
 
   handlePauseFromServer = (roomId) => {
     if (this.props.roomId !== roomId) { return; }
-    let player = this.videoPlayerRef.current.player;
+    let player = this.videoPlayerRef.current.genericPlayer;
 
     if (!player.video.paused) {
-      this.videoPlayerRef.current.player.pause();
+      this.videoPlayerRef.current.genericPlayer.pause();
     }
   };
 
   handleSeekingFromServer = (roomId, currentTime, timestamp) => {
     if (this.props.roomId !== roomId) { return; }
     this.receivedSeekingFromServer = true;
-    this.videoPlayerRef.current.player.seek(currentTime);
+    this.videoPlayerRef.current.genericPlayer.seek(currentTime);
   };
 
   handleTimeUpdateFromServer = (roomId, paused, currentTime, timestamp) => {
     if (this.props.roomId !== roomId) { return; }
-    let player = this.videoPlayerRef.current.player;
+    let player = this.videoPlayerRef.current.genericPlayer;
 
     if (player.video.paused !== paused) {
       player.toggle();
     }
     if (Math.abs(player.video.currentTime - currentTime) > 1) {
       this.receivedSeekingFromServer = true;
-      this.videoPlayerRef.current.player.seek(currentTime);
+      this.videoPlayerRef.current.genericPlayer.seek(currentTime);
     }
   };
 
   handlePlay = (player) => {
     this.props.syncClient.play(this.props.roomId, player.video.currentTime);
+
+    // TODO
+    console.log('play');
   };
 
   handlePause = (player) => {
     this.props.syncClient.pause(this.props.roomId, player.video.currentTime);
+
+    // TODO
+    console.log('pause');
   };
 
   handleSeeking = (player) => {
@@ -137,6 +144,9 @@ class SyncPlayer extends Component {
 
     let { currentTime, paused } = player.video;
     this.props.syncClient.seek(this.props.roomId, paused, currentTime);
+
+    // TODO
+    console.log('seeking: ' + player.video.currentTime);
   }
 
   /**
@@ -145,21 +155,45 @@ class SyncPlayer extends Component {
   handleTimeUpdate = (player) => {
     let { currentTime, paused } = player.video;
     this.props.syncClient.updateTime(this.props.roomId, paused, currentTime);
+
+    // TODO
+    console.log('time update: ' + player.video.currentTime);
   };
 
   render() {
-    let { playerId, className = '', ...props } = this.props;
+    let { playerId, className = '', video, ...props } = this.props;
+    let videoPlayer = null;
 
-    return (
-      <div className={`SyncPlayer ${className}`}>
-        <VideoPlayer 
+    if (video.type === 'youtube') {
+      videoPlayer = (
+        <YtbPlayer 
           container={playerId} 
+          video={video}
           onPlay={this.handlePlay}
           onPause={this.handlePause} 
           onSeeking={this.handleSeeking}
           onTimeupdate={this.handleTimeUpdate}
           ref={this.videoPlayerRef}
           {...props} />
+      )
+
+    } else {
+      videoPlayer = (
+        <VideoPlayer 
+          container={playerId} 
+          video={video}
+          onPlay={this.handlePlay}
+          onPause={this.handlePause} 
+          onSeeking={this.handleSeeking}
+          onTimeupdate={this.handleTimeUpdate}
+          ref={this.videoPlayerRef}
+          {...props} />
+      );
+    }
+
+    return (
+      <div className={`SyncPlayer ${className}`}>
+        {videoPlayer}
       </div>
     );
   }
