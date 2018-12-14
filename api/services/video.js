@@ -6,8 +6,17 @@ const { isValidUrl } = require('../utils/common');
 
 // domain => extractor
 const extractorMap = new Map([
-  ['jiqimao.tv', extractJiqimaoTv]
+  ['jiqimao.tv', extractJiqimaoTv],
+  ['youtu.be', extractYoutu],
+  ['youtube.com', extractYoutube],
+  ['www.youtube.com', extractYoutube],
 ]);
+
+async function getBrowser() {
+  return puppeteer.launch({
+    executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+}
 
 /**
  * TODO support other video types (other than HLS) of jiqimao.tv
@@ -53,6 +62,38 @@ async function extractJiqimaoTv(pageUrl) {
     }
     throw err;
   }
+}
+
+async function extractYoutu(pageUrl) {
+  if (!isValidUrl(pageUrl)) {
+    throw new ApiError.BadReq({ message: 'Invalid URL given.' });
+  }
+
+  let parsedUrl = new URL(pageUrl);
+  let url = parsedUrl.pathname.slice(1);
+  let type ='youtube';
+  let title = await extractVideoTitle(pageUrl);
+
+  if (url.length) {
+    return { url, type, title };
+  }
+  throw new ApiError.BadReq();
+}
+
+async function extractYoutube(pageUrl) {
+  if (!isValidUrl(pageUrl)) {
+    throw new ApiError.BadReq({ message: 'Invalid URL given.' });
+  }
+
+  let parsedUrl = new URL(pageUrl);
+  let url = parsedUrl.searchParams.get('v');
+  let type ='youtube';
+  let title = await extractVideoTitle(pageUrl);
+
+  if (url && url.length) {
+    return { url, type, title };
+  }
+  throw new ApiError.BadReq();
 }
 
 async function extractGeneric(pageUrl) {
