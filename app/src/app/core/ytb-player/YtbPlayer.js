@@ -17,6 +17,7 @@ const timeUpdatesInterval = 1000 / 4;
  *  - onPause
  *  - onSeeking
  *  - onTimeupdate
+ *  - onPlayerReady
  * 
  * TODO investigate `crossorigin` on script tag
  */
@@ -113,7 +114,7 @@ class YtbPlayer extends Component {
   };
 
   createYoutubeIframePlayer() {
-    let { container, video } = this.props;
+    let { container, video, onPlayerReady } = this.props;
 
     this.YT = window.YT;
     this.player = new this.YT.Player(container, {
@@ -123,6 +124,7 @@ class YtbPlayer extends Component {
       events: {
         'onStateChange': this.handlePlayerStateChange,
         'onReady': () => {
+          onPlayerReady && onPlayerReady(this.genericPlayer);
           // track current time
           requestAnimationFrame(this.trackCurrentTime);
         }

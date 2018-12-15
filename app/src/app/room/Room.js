@@ -15,6 +15,8 @@ import './Room.css';
  * `roomId` to display will never change. Later it might need 
  * to support changing the `roomId` and video info on-the-fly 
  * by using `getDerivedStateFromProps`.
+ * 
+ * For supporting that, SyncPlayer is also need to be changed.
  */
 class Room extends Component {
   constructor(props) {
@@ -28,12 +30,11 @@ class Room extends Component {
 
   componentDidMount() {
     let { roomId } = this.props.match.params;
-    let { rooms, syncClient } = this.props;
+    let { rooms } = this.props;
     let room = rooms[roomId];
 
     if (room) {
       this.setState({ room });
-      syncClient.joinRoom(roomId);
       return;
     }
 
@@ -43,7 +44,6 @@ class Room extends Component {
         let { data: room } = await getPayload(response);
         this.props.unshiftRoom(room);
         this.setState({ room });
-        syncClient.joinRoom(roomId);
         
       } catch (err) {
         if (err.status === 404) {
@@ -61,6 +61,16 @@ class Room extends Component {
       this.props.syncClient.leaveRoom(room.id);
     }
   }
+
+  handlePlayerReady = () => {
+    let { roomId } = this.props.match.params;
+    let { syncClient } = this.props;
+    let { notFound } = this.state;
+
+    if (!notFound) {
+      syncClient.joinRoom(roomId);
+    }
+  };
 
   render() {
     let { room, notFound } = this.state;
@@ -90,7 +100,8 @@ class Room extends Component {
             roomId={room.id}
             playerId={this.playerId}
             className="Room-sync-player"
-            video={{ url: room.videoUrl, type: room.videoType }} />
+            video={{ url: room.videoUrl, type: room.videoType }}
+            onPlayerReady={this.handlePlayerReady} />
           <div className="text-truncate Room-sync-player-title">
             {room.pageUrl ? (
               <a href={room.pageUrl}>{room.pageTitle || "No Title"}</a>

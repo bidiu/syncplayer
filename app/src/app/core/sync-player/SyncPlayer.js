@@ -42,21 +42,28 @@ import './SyncPlayer.css';
  *  - roomId
  *  - playerId
  *  - className
- *  - any props that underlying player supports:
- *      - video.url, video.type, etc.
+ *  - video.url, video.type
+ *  - other props that DPlayer supports (not recommended to use)
+ * 
+ * Events:
+ *  - onPlayerReady -- you should join room AFTER player is ready
+ * 
+ * Note that during the lifetime of this components, props and events
+ * provided must NOT change. In the future, support for this might
+ * be added.
  */
 class SyncPlayer extends Component {
   constructor(props) {
     super(props);
-
     this.state = { connected: this.props.syncClient.isConnected() };
     this.videoPlayerRef = React.createRef();
+    this.playerReady = false;
     // `seeking` or `time_update` (when progress adjustment is necessary)
     this.receivedSeekingFromServer = false;
   }
 
   componentDidMount() {
-    let { syncClient } = this.props;
+    let { syncClient, video, onPlayerReady } = this.props;
 
     syncClient.on('connect', this.handleConnect);
     syncClient.on('disconnect', this.handleDisconnect);
@@ -64,6 +71,15 @@ class SyncPlayer extends Component {
     syncClient.on('pause', this.handlePauseFromServer);
     syncClient.on('seeking', this.handleSeekingFromServer);
     syncClient.on('time_update', this.handleTimeUpdateFromServer);
+
+    // hardcoded for now
+    if (video.type !== 'youtube') {
+      this.playerReady = true;
+      onPlayerReady && onPlayerReady();
+
+      // TODO
+      console.log('player ready');
+    }
   }
 
   componentWillUnmount() {
@@ -160,8 +176,18 @@ class SyncPlayer extends Component {
     console.log('time update: ' + player.video.currentTime);
   };
 
+  handlePlayerReady = () => {
+    let { onPlayerReady } = this.props;
+
+    this.playerReady = true;
+    onPlayerReady && onPlayerReady();
+
+    // TODO
+    console.log('player ready');
+  };
+
   render() {
-    let { playerId, className = '', video, ...props } = this.props;
+    let { playerId, className = '', video, onPlayerReady, ...props } = this.props;
     let videoPlayer = null;
 
     if (video.type === 'youtube') {
@@ -173,6 +199,7 @@ class SyncPlayer extends Component {
           onPause={this.handlePause} 
           onSeeking={this.handleSeeking}
           onTimeupdate={this.handleTimeUpdate}
+          onPlayerReady={this.handlePlayerReady}
           ref={this.videoPlayerRef}
           {...props} />
       )
