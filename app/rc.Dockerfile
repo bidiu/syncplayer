@@ -1,5 +1,6 @@
 # specify the node base image with your desired version node:<version>
-FROM node:8.9.1
+# FROM node:8.9.1
+FROM ruby:2.5
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -10,6 +11,8 @@ WORKDIR /usr/src/app
 # But it's not recommanded to change the port (you might break some CORS features).
 EXPOSE 3000
 
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+
 # From docker offical docs
 # (https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/):
 # 1. Put mutiple params to mutiples lines with backslash so that it's
@@ -19,7 +22,8 @@ EXPOSE 3000
 #    RUN statement
 RUN apt-get update && apt-get install -y \
     build-essential \
-    ruby-full
+    # ruby-full
+    nodejs
 
 RUN gem install sass
 
