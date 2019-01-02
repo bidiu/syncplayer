@@ -2,60 +2,60 @@ version: '3.1'
 
 services:
   # mongodb server
-  the_host_mongo:
+  mongo_rc:
     image: mongo:3.6.5-jessie
     restart: always
     ports:
       - '27017:27017'
-    networks:
-      - inkbook
+    # networks:
+    #   - inkbook
     volumes:
-      - 'the_host_mongo_volume:/data/db'
+      - 'mongo_rc_volume:/data/db'
 
   # api server
-  the_host_api:
+  api_rc:
     build:
       context: ./api
       dockerfile: rc.Dockerfile
-    image: the-host-api:rc
-    networks:
-      - inkbook
+    image: syncplayer-api:rc
+    # networks:
+    #   - inkbook
     depends_on:
-      - the_host_mongo
+      - mongo_rc
   
   # web app
-  the_host_app:
+  app_rc:
     build:
       context: ./app
       dockerfile: rc.Dockerfile
-    image: the-host-app:rc
-    networks:
-      - inkbook
+    image: syncplayer-app:rc
+    # networks:
+    #   - inkbook
     depends_on:
-      - the_host_api
+      - api_rc
 
   # nginx http proxy server
-  the_host_proxy:
+  proxy_rc:
     build:
       context: ./nginx
       dockerfile: rc.Dockerfile
-    image: the-host-proxy:rc
+    image: syncplayer-proxy:rc
     ports:
       - '80:80'
-      - '443:443'
-    volumes:
-      - '/etc/ssl/private/inkbook.io.key:/etc/ssl/private/inkbook.io.key:ro'
-      - '/etc/ssl/certs/inkbook.io-ssl-bundle.crt:/etc/ssl/certs/inkbook.io-ssl-bundle.crt:ro'
-    networks:
-      - inkbook
+      # - '443:443'
+    # volumes:
+    #   - '/etc/ssl/private/inkbook.io.key:/etc/ssl/private/inkbook.io.key:ro'
+    #   - '/etc/ssl/certs/inkbook.io-ssl-bundle.crt:/etc/ssl/certs/inkbook.io-ssl-bundle.crt:ro'
+    # networks:
+    #   - inkbook
     depends_on:
-      - the_host_api
-      - the_host_app
+      - api_rc
+      - app_rc
 
 volumes:
   # used by mongodb
-  the_host_mongo_volume:
+  mongo_rc_volume:
 
-networks:
-  inkbook:
-    external: true
+# networks:
+#   inkbook:
+#     external: true

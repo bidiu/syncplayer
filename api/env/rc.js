@@ -1,6 +1,6 @@
 const env = Object.freeze({
   env: "rc",
-  mongoUri: 'mongodb://the_host_mongo:27017/thehost',
+  mongoUri: 'mongodb://mongo_rc:27017/syncplayer',
   // session cookie secret
   secret: 'secret123',
   // session cookie maxage (30 days)

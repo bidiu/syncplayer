@@ -6,9 +6,11 @@
     "clear-sass-cache": "rm -rf ./sass-cache",
     "watch-scss": "npm run clear-sass-cache && sass --load-path ./src --sourcemap=none --watch ./src:./src",
     "build-css": "npm run clear-sass-cache && sass --load-path ./src --sourcemap=none --update ./src:./src",
+    "build-rc": "npm run build-css && react-scripts build",
     "build-production": "npm run build-css && react-scripts build",
     "serve-build": "serve -sp 3000 build",
     "start": "concurrently --raw \"npm run watch-scss\" \"react-scripts start\"",
+    "start-rc": "npm run build-rc && npm run serve-build",
     "start-production": "npm run build-production && npm run serve-build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

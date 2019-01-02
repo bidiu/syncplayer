@@ -1,5 +1,5 @@
 const extractSocketAddr = (url) => {
-  let result = /^ws:\/\/(.+):(\d+)$/.exec(url);
+  let result = /^ws:\/\/(.+):(\d+)\/?/.exec(url);
   if (result) {
     return {
       host: result[1],

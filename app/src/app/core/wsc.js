@@ -49,6 +49,7 @@ class WSClient extends EventEmitter {
     let remoteDaemonPort = null;
     try {
       ({ host: socketAddress, port: remoteDaemonPort } = new URL(url));
+      if (remoteDaemonPort === '') { remoteDaemonPort = '80'; }
       if (!socketAddress || !remoteDaemonPort.match(/^\d+$/)) { throw new Error(); }
     } catch (err) {
       throw new Error(`Wrong url (${url}) to connect.`);
