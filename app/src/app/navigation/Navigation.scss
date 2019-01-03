@@ -1,7 +1,7 @@
 @import '_common';
 
 // only content
-$default-nav-height: 70px;
+$default-nav-height: 52px;
 $mobile-nav-hieght: 48px;
 
 .Navigation {
@@ -39,17 +39,35 @@ $mobile-nav-hieght: 48px;
  padding: 0 16px;
 }
 
-.Navigation-tab {
+.Navigation-tab a {
   padding: 0 16px;
+  position: relative;
+  opacity: .9;
+  transition: .3s;
 }
 
-.Navigation-logo a, .Navigation-logo img {
+.Navigation-tab a:hover {
+  opacity: 1;
+}
+
+.Navigation-tab a:hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: $theme-color-var1;
+}
+
+.Navigation-logo a, .Navigation-logo img, .Navigation-tab a {
   display: inline-block;
   height: $default-nav-height;
 }
 
 .VIEWPORT_MOBILE .Navigation-logo a, 
-.VIEWPORT_MOBILE .Navigation-logo img {
+.VIEWPORT_MOBILE .Navigation-logo img,
+.VIEWPORT_MOBILE .Navigation-tab a {
   height: $mobile-nav-hieght;
 }
 
@@ -59,9 +77,5 @@ $mobile-nav-hieght: 48px;
 }
 
 .Navigation-text-link-selected {
-  font-weight: $font-weight-black;
-}
-
-.Navigation-text-link:hover {
-  text-decoration: underline;
+  color: $theme-color-var1;
 }
