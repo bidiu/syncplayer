@@ -6,7 +6,7 @@ class RoomHistory extends Component {
   render() {
     return (
       <div className="RoomHistory">
-        RoomHistory
+        RoomHistory (Feature not implemented)
       </div>
     );
   }
