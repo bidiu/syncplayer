@@ -18,12 +18,19 @@ import { getTransitionColor } from './utils/colorUtils';
 import resources from './common/rest/resources';
 import env from './env/environment';
 
-import { addDemoRoom } from './common/state/rooms/index';
+import { addDemoRoom, syncRooms } from './common/state/rooms/index';
 import { setScrollbarWidth, setViewportSize } from './common/state/newui/index';
 
 import './App.css';
 
 const bodyBgDarkColor = '#263A49';
+
+const getInitRooms = () => {
+  return JSON.stringify({
+    rooms: {},
+    history: []
+  });
+};
 
 /**
  * TODO right now, every refresh will create a room for demo, which is not optimal
@@ -36,6 +43,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+    let { rooms, history } = JSON.parse( window.localStorage.getItem('rooms') || getInitRooms() );
+    this.props.syncRooms(rooms, history);
+
     // create a room for demo
     this.createDemoRoom();
 
@@ -98,7 +108,7 @@ class App extends Component {
   }
 
   render() {
-    let viewportType = this.props.viewportType;
+    let { viewportType, roomsSynced } = this.props;
 
     return (
       <SyncClientContext.Provider value={this.syncClient}>
@@ -108,10 +118,14 @@ class App extends Component {
           <ToastList />
           <Navigation />
 
-          <Route exact path="/" component={Home} />
-          <Route exact path="/rooms" component={RoomHistory} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/r/:roomId" component={Room} />
+          {roomsSynced && (
+            <React.Fragment>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/rooms" component={RoomHistory} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/r/:roomId" component={Room} />
+            </React.Fragment>
+          )}
         </div>
       </SyncClientContext.Provider>
     );
@@ -121,7 +135,8 @@ class App extends Component {
 export default withRouter(connect(
   state => ({
     viewportType: state.ui.viewportType,
-    viewportSize: state.newui.viewport
+    viewportSize: state.newui.viewport,
+    roomsSynced: state.rooms.synced
   }),
   dispatch => ({
     setScrollbarWidth(width) {
@@ -132,6 +147,9 @@ export default withRouter(connect(
     },
     addDemoRoom(room) {
       dispatch(addDemoRoom(room));
+    },
+    syncRooms(rooms, history) {
+      dispatch(syncRooms(rooms, history));
     }
   })
 )(App));
