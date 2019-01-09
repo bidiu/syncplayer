@@ -1,0 +1,39 @@
+@import "_common";
+
+.Footer {
+  background-color: #181a21;
+  color: #eeeeee;
+  font-weight: $font-weight-light;
+  padding: 12px 36px 36px 36px;
+}
+
+.VIEWPORT_MOBILE .Footer {
+  padding: 12px 20px 36px 20px;
+}
+
+.Footer-sections {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.Footer-section {
+  margin: 36px 60px 0 0;
+  flex-shrink: 0;
+}
+
+.VIEWPORT_MOBILE .Footer-section {
+  width: 100%;
+}
+
+.Footer-title {
+  font-weight: $font-weight-black;
+  margin-bottom: 6px;
+}
+
+.Footer-copyright {
+  text-align: center;
+  margin-top: 48px;
+  font-size: 1.4rem;
+  color: #cccccc;
+}

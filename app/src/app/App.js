@@ -11,6 +11,7 @@ import Navigation from './navigation/Navigation';
 import Home from './home/Home';
 import RoomHistory from './room-history/RoomHistory';
 import About from './about/About';
+import Footer from './footer/Footer';
 import Room from './room/Room';
 import { getScrollBarWidth, getViewportDimension } from './utils/domUtils';
 import { getPayload } from './utils/epicUtils';
@@ -126,6 +127,8 @@ class App extends Component {
               <Route exact path="/r/:roomId" component={Room} />
             </React.Fragment>
           )}
+
+          <Footer />
         </div>
       </SyncClientContext.Provider>
     );
