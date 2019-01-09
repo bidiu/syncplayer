@@ -24,17 +24,8 @@
   width: 100%;
   max-width: 1080px;
   box-shadow: $box-shadow-var4;
-  transition: transform .1s;
   overflow: hidden;
   border-radius: 8px;
-}
-
-.DemoPlayer-sync-player-1 {
-  transform: translateX(-75%);
-}
-
-.DemoPlayer-sync-player-2 {
-  transform: translateX(75%);
 }
 
 .Demo-text-container {

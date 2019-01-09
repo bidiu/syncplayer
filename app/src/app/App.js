@@ -23,7 +23,7 @@ import { setScrollbarWidth, setViewportSize } from './common/state/newui/index';
 
 import './App.css';
 
-const bodyBgDarkColor = '#263A49';
+const bodyBgDarkColor = '#FF5445';
 
 const getInitRooms = () => {
   return JSON.stringify({

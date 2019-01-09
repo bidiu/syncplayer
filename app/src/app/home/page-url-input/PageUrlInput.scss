@@ -8,7 +8,12 @@ $border-radius: 4px;
 
 .PageUrlInput {
   position: relative;
-  height: calc(100vh - 102px)
+  height: calc(100vh - 84px);
+  background-color: #00cc8d;
+}
+
+.VIEWPORT_MOBILE .PageUrlInput {
+  height: calc(100vh - 80px);
 }
 
 .PageUrlInput-form {
@@ -23,6 +28,7 @@ $border-radius: 4px;
   box-shadow: $box-shadow-var2;
   background-color: #ffffff;
   transition: box-shadow .3s;
+  z-index: 1;
 }
 
 .PageUrlInput-form-focused, 
@@ -93,9 +99,9 @@ $border-radius: 4px;
   display: inline-block;
   position: absolute;
   left: 50%;
-  bottom: 72px;
-  z-index: -1;
+  bottom: 48px;
+  z-index: 0;
   font-size: 2.8rem;
-  color: $theme-color-var2;
+  color: #ffffff;
   animation: custom-up-down-alternate 1.5s infinite alternate both;
 }

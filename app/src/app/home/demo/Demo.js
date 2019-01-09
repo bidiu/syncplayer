@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router';
-import { Observable } from 'rxjs/Observable';
 import SyncClientContext from '../../core/sync-client-context';
 import SyncClient from '../../core/sync-client';
 import DemoPlayer from '../demo-player/DemoPlayer';
-import { getTransitionNum } from '../../utils/animationUtils';
 import env from '../../env/environment';
 
 import './Demo.css';
@@ -51,33 +49,33 @@ class Demo extends Component {
 
   componentDidMount() {
     this.subscriptions = [
-      Observable.fromEvent(window, 'scroll', { passive: true })
-        .subscribe(() => {
-          requestAnimationFrame(() => {
+      // Observable.fromEvent(window, 'scroll', { passive: true })
+      //   .subscribe(() => {
+      //     requestAnimationFrame(() => {
 
-            let vh = this.props.viewportSize.height;
-            if (!vh) { return; }
-            let low = Math.round(vh * 0.5);
-            let high = Math.round(vh * 0.8);
-            let cur = window.scrollY;
+      //       let vh = this.props.viewportSize.height;
+      //       if (!vh) { return; }
+      //       let low = Math.round(vh * 0.5);
+      //       let high = Math.round(vh * 0.8);
+      //       let cur = window.scrollY;
 
-            // player's outer div, instead of the player itself
-            let syncPlayers = Array.from(document.querySelectorAll('.DemoPlayer-sync-player'));
-            if (!syncPlayers.length) { return; }
+      //       // player's outer div, instead of the player itself
+      //       let syncPlayers = Array.from(document.querySelectorAll('.DemoPlayer-sync-player'));
+      //       if (!syncPlayers.length) { return; }
 
-            if (cur < low) {
-              syncPlayers[0].style.transform = '';
-              syncPlayers[1].style.transform = '';
-            } else if (cur > high) {
-              syncPlayers[0].style.transform = 'translateX(0)';
-              syncPlayers[1].style.transform = 'translateX(0)';
-            } else {
-              let percentage = (cur - low) / (high - low);
-              syncPlayers[0].style.transform = `translateX(${Math.round(getTransitionNum(-75, 0, percentage))}%)`;
-              syncPlayers[1].style.transform = `translateX(${Math.round(getTransitionNum(75, 0, percentage))}%)`;
-            }
-          }); // end of requestAnimationFrame
-        })
+      //       if (cur < low) {
+      //         syncPlayers[0].style.transform = '';
+      //         syncPlayers[1].style.transform = '';
+      //       } else if (cur > high) {
+      //         syncPlayers[0].style.transform = 'translateX(0)';
+      //         syncPlayers[1].style.transform = 'translateX(0)';
+      //       } else {
+      //         let percentage = (cur - low) / (high - low);
+      //         syncPlayers[0].style.transform = `translateX(${Math.round(getTransitionNum(-75, 0, percentage))}%)`;
+      //         syncPlayers[1].style.transform = `translateX(${Math.round(getTransitionNum(75, 0, percentage))}%)`;
+      //       }
+      //     }); // end of requestAnimationFrame
+      //   })
     ];
   }
 
@@ -96,7 +94,7 @@ class Demo extends Component {
     return (
       <div className="Demo">
         <div className="Demo-flex-container">
-          <div className="Demo-player-container">
+          <div className="Demo-player-container" data-aos="fade-right">
             <SyncClientContext.Provider value={this.syncClients[0]}>
               <DemoPlayer 
                 roomId={roomId}
@@ -105,7 +103,7 @@ class Demo extends Component {
                 className="DemoPlayer-sync-player DemoPlayer-sync-player-1" />
             </SyncClientContext.Provider>
           </div>
-          <div className="Demo-player-container">
+          <div className="Demo-player-container" data-aos="fade-left">
             <SyncClientContext.Provider value={this.syncClients[1]}>
               <DemoPlayer 
                 roomId={roomId}
