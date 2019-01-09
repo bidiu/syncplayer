@@ -12,11 +12,13 @@ const genActionType = genActionTypeCreator('rooms');
 const UNSHIFT_ROOM = genActionType('unshift_room');
 const ADD_DEMO_ROOM = genActionType('add_demo_room');
 const SYNC_ROOMS = genActionType('sync_rooms');
+const CLEAR_ROOMS = genActionType('clear_rooms');
 
 // actions
 const unshiftRoom = genActionCreator(UNSHIFT_ROOM, 'room');
 const addDemoRoom = genActionCreator(ADD_DEMO_ROOM, 'room');
 const syncRooms = genActionCreator(SYNC_ROOMS, 'rooms', 'history');
+const clearRooms = genActionCreator(CLEAR_ROOMS);
 
 const rooms = combineReducers({ rooms: _rooms, history, demo, synced });
 
@@ -24,6 +26,7 @@ export {
   unshiftRoom, UNSHIFT_ROOM,
   addDemoRoom, ADD_DEMO_ROOM,
   syncRooms, SYNC_ROOMS,
+  clearRooms, CLEAR_ROOMS,
 };
 
 export default rooms;

@@ -99,6 +99,16 @@ html {
   box-shadow: $box-shadow-focus;
 }
 
+.sp-link {
+  cursor: pointer;
+  color: $link-color-primary;
+}
+
+.sp-link-var1 {
+  cursor: pointer;
+  color: $bg-color-critical;
+}
+
 .ink-link {
   cursor: pointer;
 }
@@ -323,4 +333,10 @@ button.shopify-btn:hover {
 button.shopify-btn:active {
   background-color: #3e2e94;
   color: #cfcfcf;
+}
+
+.cover-bkg {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }

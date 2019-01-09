@@ -72,10 +72,11 @@ async function extractYoutu(pageUrl) {
   let parsedUrl = new URL(pageUrl);
   let url = parsedUrl.pathname.slice(1);
   let type ='youtube';
+  let posterUrl = `https://img.youtube.com/vi/${url}/hqdefault.jpg`;
   let title = await extractVideoTitle(pageUrl);
 
   if (url.length) {
-    return { url, type, title };
+    return { url, type, posterUrl, title };
   }
   throw new ApiError.BadReq();
 }
@@ -88,10 +89,11 @@ async function extractYoutube(pageUrl) {
   let parsedUrl = new URL(pageUrl);
   let url = parsedUrl.searchParams.get('v');
   let type ='youtube';
+  let posterUrl = `https://img.youtube.com/vi/${url}/hqdefault.jpg`;
   let title = await extractVideoTitle(pageUrl);
 
   if (url && url.length) {
-    return { url, type, title };
+    return { url, type, posterUrl, title };
   }
   throw new ApiError.BadReq();
 }

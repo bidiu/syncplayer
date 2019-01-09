@@ -1,4 +1,4 @@
-import { UNSHIFT_ROOM, SYNC_ROOMS } from './index';
+import { UNSHIFT_ROOM, SYNC_ROOMS, CLEAR_ROOMS } from './index';
 
 const history = (state = [], { type, room, history }) => {
   switch (type) {
@@ -7,6 +7,9 @@ const history = (state = [], { type, room, history }) => {
 
     case SYNC_ROOMS:
       return [...history];
+
+    case CLEAR_ROOMS:
+      return [];
 
     default:
       return state;

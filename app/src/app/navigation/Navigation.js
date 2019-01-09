@@ -26,7 +26,7 @@ class Navigation extends Component {
               className="Navigation-text-link" 
               activeClassName="Navigation-text-link-selected" 
               to="/rooms">
-              Rooms
+              History
             </NavLink>
           </div>
 

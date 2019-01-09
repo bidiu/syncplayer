@@ -14,6 +14,10 @@ const roomSchema = new Schema({
     minlength: 1,
     maxlength: 16
   },
+  videoPosterUrl: {
+    type: String,
+    minlength: 1,
+  },
   pageUrl: {
     type: String,
     minlength: 1

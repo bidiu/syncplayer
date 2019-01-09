@@ -20,6 +20,7 @@ async function create(req, res) {
     let videoInfo = await videoService.extractVideoInfo(pageUrl);
     doc.videoUrl = videoInfo.url;
     doc.videoType = videoInfo.type;
+    doc.videoPosterUrl = videoInfo.posterUrl;
     doc.pageTitle = videoInfo.title;
   } else if (pageUrl) {
     doc.pageTitle = await videoService.extractVideoTitle(pageUrl);
