@@ -34,6 +34,21 @@
 .Footer-copyright {
   text-align: center;
   margin-top: 48px;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: #cccccc;
+}
+
+.Footer-support-title {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.Footer-support-content {
+  display: flex;
+
+  img {
+    display: block;
+    height: 30px;
+    padding-right: 10px;
+  }
 }

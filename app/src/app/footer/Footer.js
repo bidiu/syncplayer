@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import youtube from './youtube.png';
+import jiqimao from './jiqimao.png';
 import './Footer.css';
 
 class Footer extends Component {
@@ -20,6 +22,13 @@ class Footer extends Component {
           <div className="Footer-section">
             <div className="Footer-title">Contact</div>
             <div><a href="mailto:hsun059@gmail.com">Email</a></div>
+          </div>
+          <div className="Footer-section">
+            <div className="Footer-support-title">Support videos from</div>
+            <div className="Footer-support-content">
+              <img src={youtube} />
+              <img src={jiqimao} />
+            </div>
           </div>
         </div>
         <div className="Footer-copyright">&copy; syncplayer.live, 2019</div>
