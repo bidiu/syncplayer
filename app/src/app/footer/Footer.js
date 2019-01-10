@@ -26,8 +26,8 @@ class Footer extends Component {
           <div className="Footer-section">
             <div className="Footer-support-title">Support videos from</div>
             <div className="Footer-support-content">
-              <img src={youtube} />
-              <img src={jiqimao} />
+              <img src={youtube} alt="logo" />
+              <img src={jiqimao} alt="logo" />
             </div>
           </div>
         </div>
