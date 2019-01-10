@@ -7,6 +7,7 @@ import ViewportQuery from './common/ui/viewports/ViewportQuery';
 import BannerList from './common/ui/banners/BannerList';
 import ToastList from './common/ui/toasts/ToastList';
 import SyncClient from './core/sync-client';
+import ScrollToTop from './common/ui/scroll-to-top/ScrollToTop';
 import Navigation from './navigation/Navigation';
 import Home from './home/Home';
 import RoomHistory from './room-history/RoomHistory';
@@ -117,6 +118,7 @@ class App extends Component {
           <ViewportQuery />
           <BannerList />
           <ToastList />
+          <ScrollToTop />
           <Navigation />
 
           {roomsSynced && (

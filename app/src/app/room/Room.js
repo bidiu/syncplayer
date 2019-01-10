@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import SyncClientContext from '../core/sync-client-context';
 import SyncPlayer from '../core/sync-player/SyncPlayer';
+import NotificationEntry from '../common/state/notifications/notificationEntry';
 import resources from '../common/rest/resources';
 import { getPayload } from '../utils/epicUtils';
 import uuidv1 from 'uuid/v1';
 
 import { unshiftRoom } from '../common/state/rooms/index';
+import { addNotification } from '../common/state/notifications/reducer';
 
 import './Room.css';
 
@@ -29,6 +31,11 @@ class Room extends Component {
   }
 
   componentDidMount() {
+    this.props.addNotification(new NotificationEntry({
+      message: 'Share this page\'s URL to your friends, then you can watch together!',
+      timeout: 5000
+    }));
+
     let { roomId } = this.props.match.params;
     let { rooms } = this.props;
     let room = rooms[roomId];
@@ -130,6 +137,9 @@ export default connect(
   dispatch => ({
     unshiftRoom(room) {
       dispatch(unshiftRoom(room));
+    },
+    addNotification(entry) {
+      dispatch(addNotification(entry));
     }
   })
 )((props) => (
