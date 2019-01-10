@@ -7,8 +7,10 @@ const { isValidUrl } = require('../utils/common');
 // domain => extractor
 const extractorMap = new Map([
   ['jiqimao.tv', extractJiqimaoTv],
+  ['m.jiqimao.tv', extractJiqimaoTv],
   ['youtu.be', extractYoutu],
   ['youtube.com', extractYoutube],
+  ['m.youtube.com', extractYoutube],
   ['www.youtube.com', extractYoutube],
 ]);
 
