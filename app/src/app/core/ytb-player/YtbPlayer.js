@@ -24,9 +24,6 @@ const timeUpdatesInterval = 1000 / 4;
 class YtbPlayer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      youtubeEmbeddedApiReady: window.youtubeEmbeddedApiReady
-    };
 
     // `_currentTime` (NOTE in millisecond unit) and `_timestamp`
     // are used to track where `seeking` event happens, same with 
@@ -46,7 +43,6 @@ class YtbPlayer extends Component {
     if (typeof window.onYouTubeIframeAPIReady !== 'function') {
       window.onYouTubeIframeAPIReady = () => {
         window.youtubeEmbeddedApiReady = true;
-        this.setState({ youtubeEmbeddedApiReady: true });
       };
     }
 
@@ -60,16 +56,12 @@ class YtbPlayer extends Component {
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
 
-    if (this.state.youtubeEmbeddedApiReady) {
-      this.createYoutubeIframePlayer();
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    let { youtubeEmbeddedApiReady } = this.state;
-    if (!prevState.youtubeEmbeddedApiReady && youtubeEmbeddedApiReady) {
-      this.createYoutubeIframePlayer();
-    }
+    let timer = setInterval(() => {
+      if (window.youtubeEmbeddedApiReady) {
+        clearInterval(timer);
+        this.createYoutubeIframePlayer();
+      }
+    }, 500);
   }
 
   componentWillUnmount() {
